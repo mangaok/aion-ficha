@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0908">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Aion">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="assets/icon-192.png">
+<title>Aion · Ficha do Ocultista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* Estilo da primeira ficha do Aion: ouro velho sobre preto, Cinzel nos títulos, Garamond no texto, grega como divisor. */
+:root{
+  --bg:#0a0908; --panel:#15110b; --panel-2:#1b160e; --panel-raised:#221b11;
+  --line:rgba(201,162,39,.22); --line-soft:rgba(201,162,39,.12);
+  --gold:#c9a227; --gold-bright:#e7c95a; --gold-dim:#8a7434;
+  --ink:#ece3cf; --ink-soft:#c7bca2; --muted:#8f8264; --muted-2:#6d6147;
+  --hp:#b23a2f; --hp-g:rgba(178,58,47,.55); --san:#8a63b8; --san-g:rgba(138,99,184,.55); --eff:#d9772a; --eff-g:rgba(217,119,42,.55);
+  --el-morte:#b3ac9c; --el-conhec:#e7c95a; --el-energia:#a77fe0; --el-sangue:#c4564a;
+  --silver:#c9cfd6; --shadow:0 18px 50px rgba(0,0,0,.55);
+  --display:"Cinzel", Georgia, serif; --body:"EB Garamond", Georgia, serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(120% 80% at 50% -10%,rgba(201,162,39,.07),transparent 60%),radial-gradient(100% 100% at 50% 120%,rgba(138,99,184,.05),transparent 55%),var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:140px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+.app{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:30px 28px 40px}
+
+/* Cabeçalho */
+.topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.crest{display:flex;align-items:center;gap:18px}
+.crest-mark{width:58px;height:58px;flex:none;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,rgba(201,162,39,.16),transparent 70%);position:relative}
+.crest-mark::after{content:"";position:absolute;inset:7px;border:1px solid var(--line-soft);border-radius:50%}
+.crest-mark svg{width:30px;height:30px;position:relative}
+.titleblock h1{font-family:var(--display);font-weight:800;font-size:52px;letter-spacing:.22em;line-height:1;color:var(--gold-bright);text-shadow:0 2px 0 #000,0 0 26px rgba(201,162,39,.28)}
+.titleblock .sub{font-style:italic;font-size:18px;color:var(--muted);letter-spacing:.04em;margin-top:7px}
+.titleblock .sub b{color:var(--ink-soft);font-style:normal;font-weight:600}
+.top-right{display:flex;align-items:flex-end;gap:22px}
+.nex{text-align:right;font-family:var(--display)}
+.nex .n{font-size:34px;font-weight:700;color:var(--gold-bright);line-height:1}
+.nex .l{font-size:11px;letter-spacing:.32em;color:var(--muted);margin-top:6px}
+.tools{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.sync{font-size:13px;font-style:italic;color:var(--muted)}
+.sync.err{color:#d98a7f}
+
+/* Botões */
+.btn{appearance:none;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel-raised),var(--panel));color:var(--gold);font-family:var(--display);font-weight:600;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;padding:8px 14px;border-radius:3px;transition:background .15s,color .15s,border-color .15s}
+.btn:hover{border-color:var(--gold-dim);color:var(--gold-bright)}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:#14110b}
+.btn.primary:hover{background:var(--gold-bright);color:#14110b}
+.btn.on{background:rgba(201,162,39,.16);color:var(--gold-bright);border-color:var(--gold-dim)}
+.btn.small{padding:5px 10px;font-size:10.5px;letter-spacing:.12em}
+.btn.ghost{background:transparent}
+.btn.danger:hover{border-color:var(--hp);color:#e08e84}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* Abas e grega */
+.tabs{display:flex;gap:4px;margin-top:22px;border-bottom:1px solid var(--line-soft);overflow-x:auto;scrollbar-width:none}
+.tabs a{color:var(--muted);text-decoration:none;font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.24em;padding:12px 22px 11px;border:1px solid transparent;border-bottom:none;position:relative;top:1px;white-space:nowrap;transition:color .2s}
+.tabs a:hover{color:var(--ink-soft)}
+.tabs a.active{color:var(--gold-bright);background:linear-gradient(180deg,rgba(201,162,39,.10),transparent);border-color:var(--line);border-bottom:1px solid var(--bg)}
+.tabs a.active::after{content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:36px;height:2px;background:var(--gold-bright);box-shadow:0 0 12px rgba(231,201,90,.7)}
+.meander{width:100%;height:20px;display:block;opacity:.85}
+
+/* Painéis */
+.sheet{padding-top:24px}
+.grid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:28px;align-items:start}
+.grid-even{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.stack{display:flex;flex-direction:column;gap:24px}
+.panel{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.03);padding:22px;position:relative}
+.section-title{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.34em;color:var(--gold);display:flex;align-items:center;gap:12px;margin:0 0 18px;text-transform:uppercase}
+.section-title::before,.section-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.section-title.lead::before{display:none}
+.title-row{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.title-row .section-title{flex:1;margin:0;min-width:200px}
+.hint{font-size:14px;font-style:italic;color:var(--muted)}
+
+/* Barra de status (pips) */
+.vitals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.res-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px;gap:8px}
+.res-name{font-family:var(--display);font-size:12px;letter-spacing:.22em;color:var(--ink-soft);display:flex;align-items:center;gap:8px;text-transform:uppercase}
+.res-name i{width:9px;height:9px;border-radius:2px;transform:rotate(45deg);display:inline-block}
+.res-val{font-family:var(--display);font-weight:600;font-size:15px}
+.res-val .cur{color:var(--gold-bright)} .res-val .max{color:var(--muted);font-size:12px}
+.res-row{display:flex;align-items:center;gap:6px}
+.pips{flex:1;display:flex;gap:3px;height:18px;padding:4px;border:1px solid var(--line-soft);border-radius:3px;background:rgba(0,0,0,.35)}
+.pip{flex:1;min-width:0;border:0;padding:0;border-radius:1px;background:rgba(255,255,255,.05);transition:background .12s,transform .12s}
+.pip:hover{transform:scaleY(1.2)}
+.pip.on{background:var(--c);box-shadow:0 0 6px var(--g),inset 0 1px 0 rgba(255,255,255,.25)}
+.stepper{appearance:none;width:24px;height:24px;border:1px solid var(--line);background:var(--panel-raised);color:var(--gold);font-family:var(--display);font-size:14px;line-height:1;border-radius:3px;display:grid;place-items:center;flex:none}
+.stepper:hover{background:var(--gold);color:#14110b;border-color:var(--gold)}
+.res-max{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);margin-top:6px;font-style:italic}
+
+/* Retrato */
+.portrait-wrap{position:relative;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#0b0a08;aspect-ratio:1023/1537;box-shadow:var(--shadow)}
+.portrait-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.04) saturate(.92)}
+.portrait-wrap::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(10,9,8,.85) 100%),radial-gradient(120% 70% at 50% 0%,transparent 60%,rgba(0,0,0,.5))}
+.pc{position:absolute;width:22px;height:22px;border-color:var(--gold);opacity:.8;z-index:1}
+.pc.tl{top:8px;left:8px;border-top:1px solid;border-left:1px solid}.pc.tr{top:8px;right:8px;border-top:1px solid;border-right:1px solid}
+.pc.bl{bottom:8px;left:8px;border-bottom:1px solid;border-left:1px solid}.pc.br{bottom:8px;right:8px;border-bottom:1px solid;border-right:1px solid}
+.portrait-name{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--display);letter-spacing:.4em;font-size:13px;color:var(--gold-bright);text-shadow:0 2px 6px #000;z-index:1}
+
+/* Atributos */
+.attr-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.attr{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel-raised),var(--panel));border-radius:3px;padding:12px 4px 10px;text-align:center;transition:transform .18s,border-color .2s,box-shadow .2s;color:inherit;width:100%}
+button.attr:hover{transform:translateY(-3px);border-color:var(--gold-dim);box-shadow:0 10px 24px rgba(0,0,0,.5),inset 0 0 18px rgba(201,162,39,.07)}
+.attr .v{font-family:var(--display);font-weight:700;font-size:30px;color:var(--gold-bright);line-height:1}
+.attr .k{font-family:var(--display);font-size:10px;letter-spacing:.18em;color:var(--muted);margin-top:8px}
+.attr .dots{display:flex;gap:3px;justify-content:center;margin-top:7px}
+.attr .dot{width:5px;height:5px;border-radius:50%;background:var(--muted-2)}
+.attr .dot.on{background:var(--gold);box-shadow:0 0 5px rgba(201,162,39,.6)}
+.attr input{width:46px;text-align:center;background:#0b0a08;border:1px solid var(--line);border-radius:3px;font-family:var(--display);font-size:22px;font-weight:700;color:var(--gold-bright)}
+
+/* Estatísticas de combate */
+.combat{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.cstat{background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:14px 6px 12px;text-align:center}
+.cstat .v{font-family:var(--display);font-weight:700;font-size:24px;line-height:1}
+.cstat .k{font-family:var(--display);font-size:9.5px;letter-spacing:.14em;color:var(--muted);margin-top:8px;text-transform:uppercase}
+.cstat .s{font-size:12.5px;font-style:italic;color:var(--muted-2);margin-top:2px}
+
+/* Identidade */
+.idbar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.idcard{background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:14px 16px}
+.idcard .il{font-family:var(--display);font-size:9.5px;letter-spacing:.16em;color:var(--gold-dim);margin-bottom:6px;text-transform:uppercase}
+.idcard .iv{font-family:var(--display);font-size:14.5px;line-height:1.3}
+
+input.in,select.in,textarea.in{background:#0b0a08;border:1px solid var(--line);border-radius:3px;padding:6px 9px;width:100%;color:var(--ink)}
+textarea.in{min-height:96px;resize:vertical;line-height:1.55}
+input.in.n{width:58px;text-align:center;padding:4px}
+
+/* Modificadores */
+.mods{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:15px;color:var(--ink-soft);border:1px solid var(--line-soft);background:rgba(0,0,0,.25);border-radius:3px;padding:10px 14px;margin-bottom:22px}
+.mods label{display:inline-flex;gap:8px;align-items:center;cursor:pointer}
+.mods input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px}
+.mods b{font-family:var(--display);color:var(--gold-bright)}
+
+/* Perícias */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:6px 11px;font-family:var(--display);font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.seg button.on{background:rgba(201,162,39,.16);color:var(--gold-bright)}
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}
+.skill{border:1px solid var(--line-soft);border-radius:3px;background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:10px 12px;transition:border-color .2s}
+.skill:hover{border-color:var(--gold-dim)}
+.skill.trained{border-left:2px solid var(--gold-dim)}
+.skill.locked{opacity:.55}
+.skill-head{display:flex;align-items:center;gap:8px}
+.skill-name{all:unset;cursor:pointer;flex:1;font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.02em;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.skill.trained .skill-name{color:var(--gold-bright)}
+.skill-attr{font-family:var(--display);font-size:9.5px;letter-spacing:.14em;color:var(--muted)}
+.skill-roll{border:1px solid var(--line);background:var(--panel-raised);border-radius:3px;padding:3px 9px;font-family:var(--display);font-weight:700;font-size:13px;color:var(--gold-bright);min-width:66px}
+.skill-roll:hover{background:var(--gold);color:#14110b}
+.skill-desc{margin-top:8px;padding-top:8px;border-top:1px solid var(--line-soft);font-size:15px;color:var(--ink-soft);line-height:1.55}
+.skill-edit{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px;color:var(--muted);font-style:italic}
+.badge{font-family:var(--display);font-size:9px;letter-spacing:.12em;color:var(--gold);border:1px solid var(--line);border-radius:99px;padding:2px 8px;white-space:nowrap;text-transform:uppercase}
+.badge.bright{color:var(--gold-bright);border-color:var(--gold-dim)}
+.legend{font-size:14px;font-style:italic;color:var(--muted);margin:14px 0 0}
+
+/* Cartões (habilidades, ataques, itens) */
+.cards{display:flex;flex-direction:column;gap:12px}
+.ability{border:1px solid var(--line);border-left:2px solid var(--gold-dim);border-radius:3px;background:radial-gradient(140% 120% at 0% 0%,rgba(201,162,39,.08),transparent 45%),linear-gradient(180deg,var(--panel-2),var(--panel));padding:16px 18px;transition:border-color .2s,box-shadow .2s}
+.ability:hover{border-left-color:var(--gold-bright);box-shadow:0 12px 30px rgba(0,0,0,.5)}
+.ab-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ab-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ability h4{font-family:var(--display);font-weight:700;font-size:16px;color:var(--gold-bright);letter-spacing:.03em}
+.ability p{margin:8px 0 0;color:var(--ink-soft);font-size:15.5px;white-space:pre-line}
+.r-stats{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:10px}
+.r-stat{font-size:15px;color:var(--ink-soft)}
+.r-stat b{display:block;font-family:var(--display);font-size:9.5px;letter-spacing:.12em;color:var(--gold-dim);margin-bottom:1px;text-transform:uppercase;font-weight:600}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+
+/* Rituais */
+.ritual{border:1px solid var(--line-soft);border-radius:3px;background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:13px 16px;transition:border-color .2s}
+.ritual:hover,.ritual.open{border-color:var(--gold-dim)}
+.r-head{all:unset;cursor:pointer;display:flex;align-items:center;gap:14px;width:100%}
+.sigil{width:46px;height:46px;flex:none;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(201,162,39,.12),transparent 70%)}
+.sigil .sym{width:30px;height:30px;background:linear-gradient(155deg,var(--gold-bright),var(--gold-dim));-webkit-mask:var(--sym) center/contain no-repeat;mask:var(--sym) center/contain no-repeat}
+.sigil .fallback{font-family:var(--display);color:var(--gold);font-size:18px}
+.r-body{flex:1;min-width:0}
+.r-name{font-family:var(--display);font-weight:600;font-size:15px}
+.r-meta{font-size:14px;color:var(--muted);font-style:italic}
+.r-elem{font-family:var(--display);font-size:9.5px;letter-spacing:.12em;padding:2px 7px;border-radius:99px;border:1px solid currentColor;margin-left:9px;vertical-align:2px;white-space:nowrap;text-transform:uppercase}
+.el-morte{color:var(--el-morte)}.el-conhecimento{color:var(--el-conhec)}.el-energia{color:var(--el-energia)}.el-sangue{color:var(--el-sangue)}.el-medo{color:#e9e4da}
+.chev{color:var(--gold-dim);transition:transform .25s;flex:none}
+.ritual.open .chev{transform:rotate(180deg);color:var(--gold)}
+.r-more{margin-top:14px}
+.r-desc{font-size:15.5px;line-height:1.62;color:var(--ink-soft);margin:12px 0}
+.upgrade{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line-soft);font-size:15px;color:var(--ink-soft)}
+.upgrade .ut{font-family:var(--display);font-size:10.5px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+.upgrade .ut small{display:block;color:var(--eff);font-size:12px;letter-spacing:.04em;margin-top:2px}
+.upgrade .roll{font-family:var(--display);font-weight:700;color:var(--gold-bright);margin-right:6px}
+.upgrade.locked{opacity:.5}
+.upgrade .lk{display:block;font-size:13px;font-style:italic;color:var(--muted)}
+
+/* Relíquia: Tesoura das Moiras */
+.relic{position:relative;border:1px solid var(--gold-dim);border-radius:3px;padding:26px;background:radial-gradient(90% 120% at 100% 0%,rgba(201,207,214,.07),transparent 50%),radial-gradient(80% 100% at 0% 100%,rgba(201,162,39,.09),transparent 55%),linear-gradient(180deg,#1d170e,#110d08);box-shadow:var(--shadow),inset 0 0 60px rgba(0,0,0,.45),0 0 0 4px rgba(201,162,39,.05)}
+.relic::before{content:"";position:absolute;inset:6px;border:1px solid var(--line-soft);border-radius:2px;pointer-events:none}
+.relic-head{display:flex;gap:22px;align-items:center;flex-wrap:wrap;position:relative}
+.relic-art{width:120px;height:120px;flex:none;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(201,162,39,.16),transparent 70%)}
+.relic-art svg{width:84px;height:84px}
+.relic-kicker{font-family:var(--display);font-size:10.5px;letter-spacing:.36em;color:var(--gold-dim);text-transform:uppercase}
+.relic h2{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:.08em;color:var(--gold-bright);text-shadow:0 0 22px rgba(201,162,39,.25);margin-top:4px}
+.relic .epi{font-style:italic;color:var(--ink-soft);font-size:17px;margin-top:4px}
+.relic-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.relic-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:22px 0;position:relative}
+.flow-step{background:rgba(10,9,8,.6);padding:12px 14px}
+.flow-step .n{font-family:var(--display);font-size:22px;color:var(--gold-bright);font-weight:700;line-height:1}
+.flow-step .t{font-family:var(--display);font-size:10.5px;letter-spacing:.16em;color:var(--gold);margin-top:6px;text-transform:uppercase}
+.flow-step .d{font-size:14.5px;color:var(--ink-soft);margin-top:4px;line-height:1.45}
+.moirai{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative}
+.moira{border:1px solid var(--line);border-radius:3px;background:linear-gradient(180deg,rgba(34,27,17,.9),rgba(21,17,11,.9));padding:16px;display:flex;flex-direction:column}
+.moira .who{font-family:var(--display);font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.moira h3{font-family:var(--display);font-weight:700;font-size:17px;color:var(--gold-bright);margin-top:4px}
+.moira.silver h3{color:var(--silver)}
+.moira.black h3{color:#e8e1d2}
+.moira .where{font-size:14px;font-style:italic;color:var(--muted);margin-top:2px}
+.moira .when{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.moira p{font-size:15px;color:var(--ink-soft);margin:10px 0 0;line-height:1.55}
+.moira .limits{font-size:13.5px;font-style:italic;color:var(--muted);margin-top:8px;line-height:1.45}
+.moira .state{margin-top:auto;padding-top:12px}
+.moira .live{border:1px solid var(--line-soft);background:rgba(0,0,0,.3);border-radius:3px;padding:8px 10px;font-size:14.5px;color:var(--ink-soft);margin-bottom:8px}
+.moira .live b{color:var(--gold-bright);font-family:var(--display);font-weight:600}
+.relic-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px;position:relative;font-size:14px;color:var(--muted);font-style:italic}
+
+/* Variações de ataque */
+.weapon{border:1px solid var(--line-soft);border-radius:3px;background:rgba(0,0,0,.18);padding:16px}
+.weapon + .weapon{margin-top:14px}
+.weapon-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.weapon-head h4{font-family:var(--display);font-weight:700;font-size:17px;color:var(--gold-bright);letter-spacing:.03em}
+.weapon-head .ws{font-size:14.5px;font-style:italic;color:var(--muted)}
+.variants{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.variant{border:1px solid var(--line);border-radius:3px;background:linear-gradient(180deg,var(--panel-raised),var(--panel));padding:12px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,transform .18s}
+.variant:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
+.variant.full{border-color:var(--gold-dim);background:radial-gradient(120% 90% at 0% 0%,rgba(201,162,39,.12),transparent 55%),linear-gradient(180deg,var(--panel-raised),var(--panel))}
+.variant .vt{font-family:var(--display);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+.variant .chips{display:flex;gap:4px;flex-wrap:wrap;min-height:20px}
+.chip-r{font-family:var(--display);font-size:9px;letter-spacing:.1em;padding:2px 7px;border-radius:99px;border:1px solid currentColor;text-transform:uppercase;white-space:nowrap}
+.chip-r.am{color:var(--el-conhec)} .chip-r.dc{color:var(--el-morte)} .chip-r.no{color:var(--muted-2)}
+.variant .line{font-size:14.5px;color:var(--ink-soft);line-height:1.4}
+.variant .line b{font-family:var(--display);font-size:9px;letter-spacing:.12em;color:var(--gold-dim);display:block;text-transform:uppercase;font-weight:600}
+.variant .tot{font-family:var(--display);font-weight:700;color:var(--gold-bright);font-size:15px}
+.variant .cost{font-family:var(--display);font-size:11px;color:var(--eff);letter-spacing:.06em}
+.variant .vnote{font-size:13.5px;font-style:italic;color:var(--muted);line-height:1.4}
+.variant .actions{margin-top:auto;padding-top:4px}
+@media (max-width:1100px){.variants{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.variants{grid-template-columns:1fr}}
+
+/* Inventário */
+.inv-top{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:20px}
+.inv-item{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid var(--line-soft)}
+.inv-item:last-child{border-bottom:0}
+.inv-ico{width:34px;height:34px;flex:none;color:var(--gold-dim);display:grid;place-items:center;border:1px solid var(--line-soft);border-radius:50%}
+.inv-ico svg{width:18px;height:18px}
+.inv-body{flex:1;min-width:0}
+.inv-name{font-family:var(--display);font-weight:600;font-size:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.inv-desc{font-size:15px;color:var(--muted);font-style:italic;white-space:pre-line;margin-top:2px}
+.inv-item.relic-item .inv-name{color:var(--gold-bright)}
+.inv-item.relic-item .inv-ico{border-color:var(--gold-dim);color:var(--gold-bright)}
+.load{height:6px;background:rgba(0,0,0,.4);border-radius:3px;overflow:hidden;margin-top:8px}
+.load i{display:block;height:100%;background:var(--gold)}
+
+/* Lore */
+.lore{max-width:860px;margin:0 auto;padding:10px 6px 0}
+.dropline{font-family:var(--display);text-align:center;letter-spacing:.4em;color:var(--muted);font-size:12px;margin-bottom:30px;text-transform:uppercase}
+.lore p{font-size:19px;line-height:1.85;color:var(--ink-soft);margin:0 0 24px}
+.lore p.first::first-letter{font-family:"Cinzel Decorative",serif;font-size:74px;float:left;line-height:.72;padding:8px 14px 0 0;color:var(--gold-bright);text-shadow:0 2px 14px rgba(201,162,39,.4)}
+.lore .pull{font-family:var(--display);text-align:center;color:var(--gold);font-size:22px;line-height:1.5;margin:40px auto;max-width:620px}
+.lore .pull::before,.lore .pull::after{content:"❦";display:block;color:var(--gold-dim);font-size:18px;margin:14px 0}
+.lore-facts{max-width:860px;margin:36px auto 0}
+
+/* Campanha */
+.add-row{display:flex;gap:8px}
+.todo{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.todo li{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);background:linear-gradient(180deg,var(--panel-2),var(--panel));border-radius:3px;padding:10px 12px}
+.todo li.done .tx{text-decoration:line-through;color:var(--muted-2)}
+.todo input[type=checkbox]{width:18px;height:18px;margin-top:3px;accent-color:var(--gold);flex:none}
+.todo .tx{flex:1;font-size:16px;color:var(--ink-soft);white-space:pre-line}
+.todo .x{all:unset;cursor:pointer;color:var(--muted);padding:0 4px;font-size:14px}
+.todo .x:hover{color:#e08e84}
+.note-form{display:grid;gap:8px}
+.note-form .row{display:grid;grid-template-columns:1fr 150px;gap:8px}
+.tag-filter{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.tag-filter button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:3px 11px;font-family:var(--display);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.tag-filter button.on{border-color:var(--gold-dim);color:var(--gold-bright);background:rgba(201,162,39,.1)}
+.notes{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.note{border:1px solid var(--line-soft);border-left:2px solid var(--gold-dim);border-radius:3px;background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:14px 16px}
+.note.pin{border-left-color:var(--gold-bright)}
+.note-h{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.note h4{font-family:var(--display);font-size:15px;font-weight:700;color:var(--ink);margin-top:6px}
+.note .when{font-size:13px;font-style:italic;color:var(--muted)}
+.note p{margin:6px 0 0;font-size:15.5px;white-space:pre-line;color:var(--ink-soft)}
+.ntag{font-family:var(--display);font-size:9.5px;letter-spacing:.14em;padding:2px 8px;border-radius:99px;border:1px solid currentColor;text-transform:uppercase;color:var(--gold)}
+.ntag.Mistério{color:#b997e6}.ntag.Pista{color:var(--gold-bright)}.ntag.NPC{color:#8fc3d9}.ntag.Local{color:#9bc7a3}.ntag.Sessão{color:#e3a774}.ntag.Ideia{color:#e09fbd}
+.empty{color:var(--muted);font-style:italic;padding:8px 0}
+
+/* Painel de rolagens */
+.rollbox{position:fixed;right:16px;bottom:16px;width:min(390px,calc(100vw - 32px));background:linear-gradient(180deg,#1d170e,#110d08);border:1px solid var(--gold-dim);border-radius:3px;box-shadow:0 14px 44px rgba(0,0,0,.7);z-index:20}
+.rb-head{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line-soft);font-family:var(--display);font-size:11px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+.rb-last{padding:10px 14px}
+.rb-last .t{font-family:var(--display);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+.rb-last .r{font-family:var(--display);font-size:32px;font-weight:700;line-height:1.1;color:var(--gold-bright)}
+.rb-last .d{font-size:14px;font-style:italic;color:var(--muted);margin-top:2px}
+.rb-last .crit{color:#fff2bf;text-shadow:0 0 16px rgba(231,201,90,.7)}
+.rb-last .fail{color:#e08e84}
+.rollbox ul{list-style:none;margin:0;padding:0 14px 10px;max-height:220px;overflow:auto;font-size:14px;color:var(--muted);display:none}
+.rollbox.open ul{display:block}
+.rollbox li{padding:5px 0;border-top:1px solid var(--line-soft)}
+.rollbox li b{color:var(--ink-soft);font-weight:600}
+.rollbox.min .rb-last{display:none}
+
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:rgba(5,4,2,.78);display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
+.modal-bg.open{display:flex}
+.modal{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--gold-dim);border-radius:3px;width:min(640px,100%);max-height:90vh;overflow:auto;padding:22px}
+.modal .f{display:grid;gap:4px;margin-bottom:10px}
+.modal .f label{font-family:var(--display);font-size:10px;letter-spacing:.14em;color:var(--gold-dim);text-transform:uppercase}
+.modal .acts{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+.banner{border:1px solid var(--line);background:rgba(201,162,39,.06);color:var(--ink-soft);border-radius:3px;padding:8px 12px;font-size:15px;font-style:italic;margin-top:14px}
+
+@media (max-width:980px){.relic-flow,.moirai{grid-template-columns:1fr}.inv-top{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:880px){
+  .grid,.grid-even{grid-template-columns:1fr}
+  .titleblock h1{font-size:40px}
+  .vitals{grid-template-columns:1fr;gap:12px}
+  .skills{grid-template-columns:1fr}
+  .idbar{grid-template-columns:repeat(2,1fr)}
+  .portrait-wrap{max-width:360px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .app{padding:18px 14px 30px}
+  .titleblock h1{font-size:33px;letter-spacing:.16em}
+  .titleblock .sub{font-size:15px}
+  .crest-mark{width:46px;height:46px}
+  .tabs a{padding:10px 14px 9px;font-size:12px;letter-spacing:.16em}
+  .panel{padding:16px}
+  .attr-grid{grid-template-columns:repeat(5,1fr);gap:5px}
+  .attr .v{font-size:24px}
+  .upgrade{grid-template-columns:1fr}
+  .note-form .row{grid-template-columns:1fr}
+  .relic{padding:18px}
+  .relic h2{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- Celular: jeito de app ---------- */
+.mbar,.bnav{display:none}
+html{-webkit-tap-highlight-color:transparent}
+@media (max-width:700px){
+  body{padding-bottom:calc(150px + env(safe-area-inset-bottom));font-size:16px}
+  .app{padding:calc(14px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 20px calc(14px + env(safe-area-inset-left))}
+  input,select,textarea,.in{font-size:16px!important}
+  .topbar{flex-wrap:nowrap;align-items:center;gap:10px}
+  .crest{gap:10px;min-width:0}
+  .crest-mark{width:40px;height:40px}.crest-mark svg{width:22px;height:22px}
+  .titleblock{min-width:0}
+  .titleblock h1{font-size:28px;letter-spacing:.14em}
+  .titleblock .sub{font-size:13.5px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top-right{gap:10px;align-items:center}
+  .tools{gap:4px}.sync{font-size:11px}
+  .nex .n{font-size:22px}.nex .l{font-size:9px;margin-top:3px}
+  .tabs{display:none}
+  .meander{height:14px;margin-top:10px}
+
+  /* status fixo no topo */
+  .vitals{position:sticky;top:0;z-index:15;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px calc(-14px - env(safe-area-inset-left)) 0;padding:10px 14px;background:rgba(10,9,8,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+  .res-head{margin-bottom:5px}
+  .res-name{font-size:9.5px;letter-spacing:.14em;gap:5px}
+  .res-name i{width:7px;height:7px}
+  .res-val{font-size:14px}.res-val .max{font-size:10.5px}
+  .pips{display:none}
+  .mbar{display:block;flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+  .mbar i{display:block;height:100%;border-radius:3px;transition:width .2s}
+  .stepper{width:30px;height:30px;font-size:17px}
+  .res-max{font-size:12px}
+
+  /* barra de abas embaixo */
+  .bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:25;background:rgba(14,12,9,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px calc(4px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(4px + env(safe-area-inset-left))}
+  .bnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 0;color:var(--muted);text-decoration:none;font-family:var(--display);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;border-radius:8px}
+  .bnav a svg{width:22px;height:22px}
+  .bnav a.active{color:var(--gold-bright)}
+  .bnav a.active svg{filter:drop-shadow(0 0 6px rgba(231,201,90,.55))}
+
+  /* rolagens viram uma faixa acima das abas */
+  .rollbox{left:10px;right:10px;width:auto;bottom:calc(66px + env(safe-area-inset-bottom));border-radius:10px}
+  .rb-head{padding:6px 10px}
+  .rb-last .r{font-size:28px}
+  .rollbox ul{max-height:30vh}
+
+  /* toque */
+  .btn{padding:10px 14px;font-size:11px}
+  .btn.small{padding:8px 11px;font-size:10px}
+  .skill-roll{padding:7px 10px;min-width:72px}
+  .skill{padding:12px}
+  .actions{gap:8px}
+  .mods{gap:10px;font-size:14px;padding:10px 12px}
+  .panel{padding:16px 14px}
+  .section-title{font-size:12px;letter-spacing:.26em}
+
+  /* ficha */
+  .portrait-wrap{max-width:none;aspect-ratio:4/3}
+  .portrait-wrap img{object-position:50% 12%}
+  .attr{padding:10px 2px 8px}.attr .v{font-size:24px}.attr .k{font-size:9px}
+  .combat{grid-template-columns:repeat(3,1fr)}
+  .cstat .v{font-size:20px}
+  .idbar{grid-template-columns:1fr 1fr!important}
+
+  /* variações de ataque em carrossel */
+  .variants{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -14px;padding:2px 14px 8px;scrollbar-width:none}
+  .variants::-webkit-scrollbar{display:none}
+  .variant{flex:0 0 82%;scroll-snap-align:start}
+  .variant:hover{transform:none}
+  .weapon{padding:12px}
+  .relic{padding:16px 14px}
+  .relic-head{gap:14px}
+  .relic-art{width:76px;height:76px}.relic-art svg{width:56px;height:56px}
+  .relic h2{font-size:22px}
+  .relic .epi{font-size:15px}
+  .relic-flow{grid-template-columns:1fr}
+  .flow-step{display:grid;grid-template-columns:34px 1fr;column-gap:8px}
+  .flow-step .n{grid-row:span 2;font-size:20px}
+  .flow-step .t{margin-top:0}
+
+  /* rituais */
+  .upgrade{grid-template-columns:1fr auto}
+  .upgrade>div:nth-child(2){grid-column:1/-1;order:3}
+  .sigil{width:40px;height:40px}.sigil .sym{width:26px;height:26px}
+
+  /* lore */
+  .lore p{font-size:17px;line-height:1.75}
+  .lore p.first::first-letter{font-size:58px}
+
+  /* janelas sobem de baixo */
+  .modal-bg{align-items:flex-end;padding:0}
+  .modal{width:100%;border-radius:14px 14px 0 0;max-height:88vh;padding:20px 16px calc(20px + env(safe-area-inset-bottom))}
+}
+@media (hover:none){button.attr:hover,.variant:hover,.ability:hover{transform:none}}
+
+.edit-ico{display:none}
+@media (max-width:700px){
+  #btnEdit{display:none}
+  .edit-ico{display:grid;place-items:center;width:38px;height:38px;padding:0}
+  .sync{max-width:110px;text-align:right;line-height:1.2}
+  .rollbox.min{left:auto;right:12px;width:auto;border-radius:999px}
+  .rollbox.min .rb-head{border:0;padding:4px}
+  .rollbox.min .rb-label,.rollbox.min #rbHist{display:none}
+  .relic-head{flex-direction:column;align-items:flex-start}
+  .relic-art{width:64px;height:64px}.relic-art svg{width:46px;height:46px}
+  .relic-kicker{font-size:9px;letter-spacing:.24em}
+  .relic .variants{margin:0;padding:2px 0 8px}
+}
+
+/* ---------- App: login, faixa do topo, status em cartões ---------- */
+.notch{position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:var(--bg);z-index:16}
+.auth{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;background:radial-gradient(120% 80% at 50% 0%,rgba(201,162,39,.10),transparent 60%),var(--bg)}
+.auth[hidden]{display:none}
+.auth-card{width:min(360px,100%);text-align:center}
+.auth-title{font-family:var(--display);font-weight:800;font-size:40px;letter-spacing:.24em;color:var(--gold-bright);text-shadow:0 0 26px rgba(201,162,39,.28)}
+.auth-sub{font-style:italic;color:var(--muted);margin:4px 0 24px}
+.auth-form{display:none;text-align:left;gap:8px;flex-direction:column}
+.auth-form label{font-family:var(--display);font-size:10px;letter-spacing:.16em;color:var(--gold-dim);text-transform:uppercase}
+.auth-form .in{height:46px;font-size:16px}
+.auth-form .btn{height:46px;margin-top:6px}
+.auth-msg{min-height:1.4em;color:var(--ink-soft);font-style:italic;margin:6px 0 0}
+.auth-setup,.auth-loading{display:none;color:var(--ink-soft)}
+.auth[data-state="login"] .auth-form{display:flex}
+.auth[data-state="setup"] .auth-setup{display:block}
+.auth[data-state="loading"] .auth-loading{display:block}
+
+.vtile{display:none}
+.vs{--c:var(--gold)}
+.vs-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.vs-big b{font-family:var(--display);font-weight:700;font-size:56px;line-height:1;color:var(--c);text-shadow:0 0 22px var(--g)}
+.vs-big span{font-family:var(--display);font-size:20px;color:var(--muted);margin-left:4px}
+.vs-note{font-size:14px;font-style:italic;color:var(--muted);text-align:right}
+.vs-bar{height:10px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden;margin:14px 0 18px}
+.vs-bar i{display:block;height:100%;background:var(--c);box-shadow:0 0 10px var(--g);transition:width .2s}
+.vs-step{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.vbtn{appearance:none;height:54px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(180deg,var(--panel-raised),var(--panel));color:var(--ink);font-family:var(--display);font-weight:700;font-size:19px}
+.vbtn:active{background:var(--gold);color:#14110b}
+.vbtn.down{color:#e8a39b}.vbtn.up{color:#a9d6b2}
+.vs-amt{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.vs-amt input{height:54px;text-align:center;font-family:var(--display);font-size:22px;border-radius:10px}
+.vs-amt .vbtn{font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.vs-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft);font-size:15px;color:var(--muted)}
+.vs-foot label{display:flex;align-items:center;gap:8px}
+.vs-foot input{width:70px;height:40px;text-align:center}
+
+.conta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.conta .who{flex:1;min-width:200px;color:var(--ink-soft);font-style:italic}
+
+@media (max-width:700px){
+  .vitals{top:env(safe-area-inset-top);gap:8px;padding:10px 12px}
+  .vbox>.res-head,.vbox>.res-row,.vbox>.res-max{display:none}
+  .vtile{all:unset;box-sizing:border-box;width:100%;display:flex;flex-direction:column;gap:7px;padding:11px 11px 12px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,var(--panel-raised),var(--panel));cursor:pointer;position:relative;overflow:hidden;-webkit-user-select:none;user-select:none}
+  .vtile::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--c);box-shadow:0 0 10px var(--g);opacity:.85}
+  .vtile:active{transform:scale(.97)}
+  .vt-l{font-family:var(--display);font-size:9.5px;letter-spacing:.16em;color:var(--ink-soft);text-transform:uppercase;display:flex;align-items:center;gap:6px}
+  .vt-l i{width:7px;height:7px;border-radius:2px;transform:rotate(45deg);background:var(--c)}
+  .vt-n{line-height:1}
+  .vt-n b{font-family:var(--display);font-weight:700;font-size:27px;color:var(--ink)}
+  .vt-n small{font-family:var(--display);font-size:12px;color:var(--muted);margin-left:2px}
+  .vt-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+  .vt-bar i{display:block;height:100%;background:var(--c);box-shadow:0 0 8px var(--g);transition:width .25s}
+  .vtile.low{border-color:var(--c)}
+  .vtile.low .vt-n b{color:var(--c)}
+  .vt-st{position:absolute;top:9px;right:9px;font-family:var(--display);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--c);border:1px solid var(--c);border-radius:99px;padding:1px 6px}
+  @media (prefers-reduced-motion:no-preference){.vtile.low .vt-bar i{animation:pulse 1.6s ease-in-out infinite}}
+}
+@keyframes pulse{50%{opacity:.45}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="meander" width="42" height="20" patternUnits="userSpaceOnUse"><path d="M0 3 H42 M6 3 V16 H36 V8 H14 V13 H28 V11" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="square"/></pattern>
+</defs></svg>
+
+<div class="notch" aria-hidden="true"></div>
+<div class="auth" id="auth" data-state="loading">
+  <div class="auth-card">
+    <div class="crest-mark" style="margin:0 auto 14px"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.3" aria-hidden="true"><path d="M12 2 20 12 12 22 4 12Z"/><circle cx="12" cy="12" r="3.2"/></svg></div>
+    <h1 class="auth-title">AION</h1>
+    <p class="auth-sub">Ficha do Ocultista</p>
+    <p class="auth-loading">Abrindo…</p>
+    <div class="auth-setup" id="authSetup"><p>O Firebase ainda não foi configurado. Cole a configuração do seu projeto no arquivo <b>firebase-config.js</b> do repositório e recarregue.</p></div>
+    <form class="auth-form" id="authForm" autocomplete="on">
+      <label for="authEmail">E-mail</label><input class="in" id="authEmail" name="email" type="email" autocomplete="username" required>
+      <label for="authSenha">Senha</label><input class="in" id="authSenha" name="senha" type="password" autocomplete="current-password" required>
+      <button class="btn primary" type="submit">Entrar</button>
+      <button class="btn ghost" type="button" id="authReset">Esqueci a senha</button>
+      <p class="auth-msg" id="authMsg" role="status"></p>
+    </form>
+  </div>
+</div>
+<div class="app">
+  <header>
+    <div class="topbar">
+      <div class="crest">
+        <div class="crest-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.3" aria-hidden="true"><path d="M12 2 20 12 12 22 4 12Z"/><circle cx="12" cy="12" r="3.2"/><path d="M12 6v2.8M12 15.2V18"/></svg></div>
+        <div class="titleblock">
+          <h1 id="nome">AION</h1>
+          <div class="sub" id="sub"></div>
+        </div>
+      </div>
+      <div class="top-right">
+        <div class="tools">
+          <span class="sync" id="sync">Conectando…</span>
+          <button class="btn small" id="btnEdit" type="button">Editar ficha</button><button class="btn small edit-ico" id="btnEdit2" type="button" aria-label="Editar ficha"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h4L19 9l-4-4L4 16Z"/><path d="m13.5 6.5 4 4"/></svg></button>
+        </div>
+        <div class="nex"><div class="n num" id="nexNum">10%</div><div class="l">NEX</div></div>
+      </div>
+    </div>
+    <div class="vitals" id="status"></div>
+    <div id="bannerSlot"></div>
+    <nav class="tabs" id="tabs" aria-label="Seções da ficha">
+      <a href="#ficha" data-tab="ficha">Ficha</a>
+      <a href="#combate" data-tab="combate">Combate</a>
+      <a href="#rituais" data-tab="rituais">Rituais</a>
+      <a href="#habilidades" data-tab="habilidades">Habilidades</a>
+      <a href="#inventario" data-tab="inventario">Inventário</a>
+      <a href="#lore" data-tab="lore">Lore</a>
+      <a href="#campanha" data-tab="campanha">Campanha</a>
+    </nav>
+    <svg class="meander" preserveAspectRatio="xMidYMid" aria-hidden="true"><rect width="100%" height="20" fill="url(#meander)"/></svg>
+  </header>
+  <main class="sheet" id="main"></main>
+</div>
+
+<nav class="bnav" id="bnav" aria-label="Seções da ficha">
+  <a href="#ficha" data-tab="ficha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/></svg><span>Ficha</span></a>
+  <a href="#combate" data-tab="combate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l9 9M20 4l-9 9M7 17l-3 3M17 17l3 3M5.5 14.5l4 4M18.5 14.5l-4 4"/></svg><span>Combate</span></a>
+  <a href="#rituais" data-tab="rituais"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.5"/><path d="M12 4 19 16H5Z"/></svg><span>Rituais</span></a>
+  <a href="#habilidades" data-tab="habilidades"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7Z"/></svg><span>Poderes</span></a>
+  <a href="#inventario" data-tab="inventario"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 8V6a5 5 0 0 1 10 0v2"/><rect x="4" y="8" width="16" height="13" rx="2"/></svg><span>Itens</span></a>
+  <a href="#lore" data-tab="lore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4Z"/><path d="M20 4h-7a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h7Z"/></svg><span>Lore</span></a>
+  <a href="#campanha" data-tab="campanha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg><span>Notas</span></a>
+</nav>
+<div class="rollbox min" id="rollbox">
+  <div class="rb-head"><span class="rb-label">Rolagens</span><span><button class="btn small ghost" type="button" id="rbHist">Histórico</button> <button class="btn small ghost" type="button" id="rbMin">Rolagens</button></span></div>
+  <div class="rb-last" id="rbLast"><div class="d">Clique numa perícia, atributo, ataque ou ritual para rolar.</div></div>
+  <ul id="rbList"></ul>
+</div>
+
+<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><h3 class="section-title lead" id="modalTitle">Editar</h3><form id="modalForm"></form></div>
+</div>
+
+<script>
+/* ---------- Estrutura base (o conteúdo vem do banco) ---------- */
+const BASE = {
+  info:{nome:"Aion",jogador:"",origem:"",classe:"",trilha:"",nex:0,patente:"",idade:"",nacionalidade:"",idiomas:"",deslocamento:"",ambientacao:"",aparencia:"",afinidade:false},
+  atributos:{AGI:0,FOR:0,INT:0,PRE:0,VIG:0},
+  status:{pv:{atual:0,max:1},san:{atual:0,max:1},pe:{atual:0,max:1}},
+  defesa:{equip:0,outros:0}, protecao:"", resistencias:"", proficiencias:"",
+  pericias:{}, ataques:[], habilidades:[], rituais:[], itens:[],
+  inventario:{prestigio:0,limiteCredito:"",cargaMax:0,limiteItens:""},
+  lore:{titulo:"",citacao:"",texto:""},
+  tesoura:null
+};
+const SKILLS = [
+ ["acrobacia","Acrobacia","AGI","+","Equilíbrio, cambalhotas e manobras ágeis. Serve para amortecer quedas, escapar de um agarrão, passar pelo espaço de um inimigo e se levantar rápido."],
+ ["adestramento","Adestramento","PRE","*","Lidar com animais: acalmar, conduzir, ensinar comandos e montar sem cair."],
+ ["artes","Artes","PRE","*","Expressão artística (música, atuação, pintura, escrita). Impressiona uma plateia e pode render bônus em interações sociais."],
+ ["atletismo","Atletismo","FOR","","Força física aplicada: correr, escalar, nadar, saltar e levantar peso."],
+ ["atualidades","Atualidades","INT","","Conhecimento geral do mundo: notícias, política, cultura pop, esportes. Útil para lembrar fatos e reconhecer figuras públicas."],
+ ["ciencias","Ciências","INT","*","Matemática, física, química e biologia. Perguntas simples dispensam teste; questões complexas pedem DT 20."],
+ ["crime","Crime","AGI","*+","Arrombar fechaduras, furtar, sabotar mecanismos e esconder objetos no corpo."],
+ ["diplomacia","Diplomacia","PRE","","Convencer, negociar e mudar a atitude de alguém. Também acalma uma pessoa em pânico ou à beira do enlouquecimento."],
+ ["enganacao","Enganação","PRE","","Mentir, blefar, se disfarçar e fintar em combate. É resistida pela Intuição do alvo. É como o Aion desvia perguntas sobre quem ele é."],
+ ["fortitude","Fortitude","VIG","","Resistência física: venenos, doenças, fadiga e efeitos que atacam o corpo (como Decadência e Definhar). Também define o Bloqueio."],
+ ["furtividade","Furtividade","AGI","+","Esconder-se e se mover sem ser notado. Resistida pela Percepção de quem procura."],
+ ["iniciativa","Iniciativa","AGI","","Define a ordem de ação no início do combate e reações a situações repentinas."],
+ ["intimidacao","Intimidação","PRE","","Assustar ou coagir alguém com ameaças, postura ou presença. Pode deixar o alvo abalado."],
+ ["intuicao","Intuição","PRE","","Empatia e sexto sentido: perceber mentiras (contra Enganação) e, treinado, pressentir que algo está errado numa pessoa ou situação (DT 20). No Aion vem do Manual Operacional."],
+ ["investigacao","Investigação","INT","","Procurar pistas, examinar cenas, pesquisar documentos e arquivos, interrogar com método."],
+ ["luta","Luta","FOR","","Ataques corpo a corpo com armas brancas ou desarmado."],
+ ["medicina","Medicina","INT","","Primeiros socorros (estabilizar alguém morrendo), tratar ferimentos e doenças, examinar cadáveres."],
+ ["ocultismo","Ocultismo","INT","*","Identificar criaturas, rituais, sigilos e itens paranormais. Com Lâmina Maldita, o Aion também ataca com Ocultismo usando a arma amaldiçoada."],
+ ["percepcao","Percepção","PRE","","Notar o que está escondido, ouvir ruídos, perceber emboscadas. Resiste à Furtividade alheia."],
+ ["pilotagem","Pilotagem","AGI","*","Conduzir veículos em situações difíceis: perseguições, terreno ruim, manobras arriscadas."],
+ ["pontaria","Pontaria","AGI","","Ataques à distância com armas de disparo ou arremesso."],
+ ["profissao","Profissão","INT","*","Um ofício e o conhecimento que vem com ele. Para o Aion, os meses de trabalho com a milícia do bairro grego."],
+ ["reflexos","Reflexos","AGI","","Reagir rápido a explosões, armadilhas e efeitos de área. Soma na Esquiva."],
+ ["religiao","Religião","PRE","*","Mitos, crenças, ritos e símbolos sagrados. Ajuda a reconhecer divindades e a acalmar alguém pela fé. O amuleto de Hécate dá +2."],
+ ["sobrevivencia","Sobrevivência","INT","","Rastrear, se orientar, acampar e encontrar comida e abrigo em terreno hostil."],
+ ["tatica","Tática","INT","*","Ler o terreno e o inimigo, planejar emboscadas e coordenar ações de grupo."],
+ ["tecnologia","Tecnologia","INT","*","Computadores, eletrônicos e sistemas: hackear, consertar, operar equipamentos."],
+ ["vontade","Vontade","PRE","","Força mental: resistir a medo, efeitos mentais e rituais de Conhecimento. Também usada para conjurar sob pressão."]
+];
+const ELEMENTS = ["Morte","Conhecimento","Energia","Sangue","Medo"];
+const NOTE_TAGS = ["Geral","Sessão","NPC","Pista","Local","Mistério","Ideia"];
+const SIGILS = {"amaldiçoar arma":"ritual-amaldicoar","cicatrização":"ritual-cicatrizacao","decadência":"ritual-decadencia","definhar":"ritual-definhar","perturbação":"ritual-perturbacao"};
+const ICO = {
+  staff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 21 17 4"/><circle cx="17.5" cy="3.5" r="2"/></svg>',
+  amulet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 3h8l-2 4M16 3l-2 4M8 3l2 4"/><circle cx="12" cy="14" r="6"/><circle cx="12" cy="14" r="2.4"/></svg>',
+  pack:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 8V6a5 5 0 0 1 10 0v2"/><rect x="4" y="8" width="16" height="13" rx="2"/><path d="M9 12h6"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4Z"/><path d="M20 4h-7a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h7Z"/></svg>',
+  vial:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 3h6M10 3v6l-4 8a2 2 0 0 0 2 3h8a2 2 0 0 0 2-3l-4-8V3"/><path d="M7.5 15h9"/></svg>',
+  belt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 9h20v6H2z"/><rect x="9" y="7" width="6" height="10" rx="1"/><path d="M12 11v2"/></svg>',
+  rune:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16" opacity=".55"/></svg>',
+  shears:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 16 19 3M16 16 5 3"/></svg>'
+};
+const SHEARS_ART = `<svg viewBox="0 0 100 100" aria-hidden="true">
+  <defs><linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e7c95a"/><stop offset="1" stop-color="#8a7434"/></linearGradient>
+  <linearGradient id="gSilver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef1f4"/><stop offset="1" stop-color="#8d949c"/></linearGradient></defs>
+  <path d="M50 52 L30 8 L36 6 L54 48 Z" fill="url(#gSilver)"/>
+  <path d="M50 52 L70 8 L64 6 L46 48 Z" fill="#0d0b08" stroke="#6d6147" stroke-width="1"/>
+  <path d="M38 62 C30 70 24 84 30 92 C36 98 48 94 50 84 C52 76 48 68 44 62" fill="none" stroke="url(#gGold)" stroke-width="3"/>
+  <path d="M62 62 C70 70 76 84 70 92 C64 98 52 94 50 84" fill="none" stroke="url(#gGold)" stroke-width="3"/>
+  <circle cx="50" cy="54" r="4.5" fill="#0a0908" stroke="url(#gGold)" stroke-width="2"/>
+  <path d="M20 40 Q50 30 80 40" fill="none" stroke="#c9a227" stroke-width=".8" stroke-dasharray="2 3" opacity=".7"/>
+</svg>`;
+
+/* ---------- Estado ---------- */
+let S = structuredClone(BASE);
+let notas = [], tarefas = [];
+let edit = false, tab = "ficha", skillFilter = "todas", noteFilter = "Todas", showDone = true;
+const openSkills = new Set(), openRit = new Set();
+let mods = {saber:false, bonus:0};
+let db = null, fichaRef = null, readOnly = false, loaded = false;
+let dirty = false, saving = false, again = false, saveTimer = null;
+const rolls = [];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const slug = s => String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z]/g,"");
+const uid = () => Math.random().toString(36).slice(2,10);
+const chev = '<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+
+/* ---------- Regras ---------- */
+const nex = () => Number(S.info.nex)||0;
+const peTurno = () => Math.max(1, Math.floor(nex()/5));
+const circulo = () => nex()>=85?4:nex()>=55?3:nex()>=25?2:1;
+const temAfinidade = () => !!S.info.afinidade;
+const skBonus = k => { const p = S.pericias[k]||{}; return (Number(p.treino)||0)+(Number(p.outros)||0); };
+const defesa = () => 10 + (Number(S.atributos.AGI)||0) + (Number(S.defesa.equip)||0) + (Number(S.defesa.outros)||0);
+const esquiva = () => defesa() + skBonus("reflexos");
+const bloqueio = () => skBonus("fortitude");
+const dtRitual = () => 10 + peTurno() + (Number(S.atributos.PRE)||0);
+const grade = t => t>=15?"Expert":t>=10?"Veterano":t>=5?"Treinado":"";
+
+/* ---------- Dados ---------- */
+const d = s => 1 + Math.floor(Math.random()*s);
+function parseExpr(expr){
+  const out = {terms:[], mod:0};
+  String(expr||"").replace(/\s+/g,"").replace(/([+-]?)(\d*)d(\d+)|([+-]?\d+)/gi,(m,sg,n,s,flat)=>{
+    if(s) out.terms.push({n:Number(n||1)*(sg==="-"?-1:1), s:Number(s)}); else if(flat) out.mod += Number(flat); return "";
+  });
+  return out;
+}
+function rollExpr(expr, mult=1){
+  const p = parseExpr(expr); let total = p.mod; const parts = [];
+  p.terms.forEach(t=>{ const n=Math.abs(t.n)*mult; const vs=[]; for(let i=0;i<n;i++) vs.push(d(t.s)); total += vs.reduce((a,b)=>a+b,0)*(t.n<0?-1:1); parts.push(`${n}d${t.s}[${vs.join(",")}]`); });
+  if(p.mod) parts.push((p.mod>0?"+":"")+p.mod);
+  return {total, txt:parts.join(" ")};
+}
+function rollTest(attrKey, bonus){
+  const a = Number(S.atributos[attrKey])||0; const n = a>0?a:2;
+  const vs = Array.from({length:n},()=>d(20)); const pick = a>0?Math.max(...vs):Math.min(...vs);
+  let extra = Number(mods.bonus)||0; const note = [];
+  if(mods.saber && attrKey==="INT" && spendPE(2,"Saber é Poder")){ extra += 5; note.push("Saber é Poder +5 (−2 PE)"); }
+  return {total:pick+bonus+extra, pick, txt:`${n}d20${a>0?"":" (pior)"} [${vs.join(", ")}] → ${pick} + ${bonus}${extra?` + ${extra}`:""}${note.length?" · "+note.join(" · "):""}`, nat20:pick===20, nat1:pick===1};
+}
+function log(title, result, detail, cls=""){
+  rolls.unshift({title, result, detail}); if(rolls.length>40) rolls.pop();
+  const box=$("#rollbox"); box.classList.remove("min"); $("#rbMin").textContent="Ocultar";
+  $("#rbLast").innerHTML = `<div class="t">${esc(title)}</div><div class="r num ${cls}">${esc(result)}</div><div class="d num">${esc(detail)}</div>`;
+  $("#rbList").innerHTML = rolls.slice(1).map(r=>`<li><b>${esc(r.title)}:</b> <span class="num">${esc(r.result)}</span> · ${esc(r.detail)}</li>`).join("") || "<li>Nada ainda.</li>";
+}
+function spendPE(n, why){
+  const pe = S.status.pe;
+  if(pe.atual < n){ log(why, "PE insuficiente", `Precisa de ${n} PE, tem ${pe.atual}.`, "fail"); return false; }
+  pe.atual -= n; queueSave(); renderStatus(); return true;
+}
+
+/* ---------- Banco ---------- */
+function setSync(t, err){ const el=$("#sync"); el.textContent=t; el.classList.toggle("err",!!err); }
+function queueSave(){ dirty=true; setSync("Salvando…"); clearTimeout(saveTimer); saveTimer=setTimeout(flush,600); }
+async function flush(){
+  if(!fichaRef){ dirty=false; setSync("Ainda conectando…", true); return; }
+  if(readOnly){ dirty=false; return; }
+  if(saving){ again=true; return; }
+  saving=true;
+  try{ const w = fichaRef.set(JSON.parse(JSON.stringify(S))); if(!navigator.onLine){ setSync("Offline, salvo no aparelho"); } await w; setSync("Salvo"); } catch(e){ handleWriteErr(e); }
+  saving=false; if(again){ again=false; flush(); } else dirty=false;
+}
+function handleWriteErr(e){
+  const c = e && e.code;
+  if(c==="invalid_argument"||c==="revoked"||c==="not_granted"){ readOnly=true; setSync("Somente leitura", true); }
+  else if(c==="quota_exceeded") setSync("Banco cheio: apague anotações antigas", true);
+  else setSync("Falha ao salvar, tente de novo", true);
+}
+function mergeBase(data){
+  const o = structuredClone(data);
+  for(const k of Object.keys(BASE)) if(o[k]===undefined) o[k]=structuredClone(BASE[k]);
+  o.info = Object.assign({}, BASE.info, o.info||{});
+  return o;
+}
+const dbReady = new Promise(r=>{ window.__dbReady = r; });
+async function connect(){
+  db = await dbReady;
+  fichaRef = db.doc("ficha/aion");
+  const timer = setTimeout(()=>setSync("O banco ainda não respondeu", true), 10000);
+  fichaRef.onSnapshot(snap=>{
+    if(!snap.metadata.fromCache) clearTimeout(timer);
+    if(dirty||saving) return;
+    if(snap.exists){ S = mergeBase(snap.data()); loaded = true; }
+    else if(!snap.metadata.fromCache){ loaded = true; }
+    setSync(snap.metadata.fromCache?(navigator.onLine?"Carregando…":"Offline, salvo no aparelho"):(snap.metadata.hasPendingWrites?"Salvando…":"Sincronizado"));
+    render();
+  }, ()=>{ clearTimeout(timer); setSync("Conexão perdida com o banco", true); });
+  db.collection("notas").onSnapshot(s=>{ notas=s.docs.map(x=>({id:x.id,...x.data()})); if(tab==="campanha") render(); }, ()=>{});
+  db.collection("tarefas").onSnapshot(s=>{ tarefas=s.docs.map(x=>({id:x.id,...x.data()})); if(tab==="campanha") render(); }, ()=>{});
+}
+async function dbWrite(fn){ if(!db){ setSync("Ainda conectando…", true); return false; } try{ await fn(); return true; }catch(e){ handleWriteErr(e); return false; } }
+
+/* ---------- Cabeçalho ---------- */
+function renderHeader(){
+  const i = S.info;
+  $("#nome").textContent = (i.nome||"Aion").toUpperCase();
+  $("#sub").innerHTML = [i.idade && esc(i.idade), i.nacionalidade && `<b>${esc(i.nacionalidade)}</b>`, i.classe && esc(i.classe), i.trilha && esc(i.trilha)].filter(Boolean).join(" · ");
+  $("#nexNum").textContent = nex()+"%";
+  $("#btnEdit").classList.toggle("on", edit); $("#btnEdit2").classList.toggle("on", edit);
+  $("#btnEdit").textContent = edit ? "Concluir edição" : "Editar ficha";
+}
+function renderStatus(){
+  const defs = [["pv","Vida","--hp","--hp-g"],["san","Sanidade","--san","--san-g"],["pe","Esforço","--eff","--eff-g"]];
+  $("#status").innerHTML = defs.map(([k,l,c,g])=>{
+    const s = S.status[k]; const max = Math.max(1, Number(s.max)||1);
+    const pips = Array.from({length:max},(_,n)=>`<button type="button" class="pip ${n<s.atual?"on":""}" data-act="pip" data-k="${k}" data-v="${n+1}" aria-label="${l} ${n+1}"></button>`).join("");
+    const pct = Math.max(0,Math.min(100,s.atual/max*100)); const low = s.atual<=Math.ceil(max/4);
+    const st = k==="pv"&&s.atual<=0?"Morrendo":k==="san"&&s.atual<=0?"Enlouquecendo":k==="pe"&&s.atual<=0?"Sem PE":"";
+    return `<div class="vbox">
+      <button class="vtile ${low?"low":""}" type="button" data-act="vsheet" data-k="${k}" style="--c:var(${c});--g:var(${g})" aria-label="${l}: ${s.atual} de ${s.max}. Toque para ajustar">
+        <span class="vt-l"><i></i>${l}</span>
+        <span class="vt-n num"><b>${s.atual}</b><small>/${s.max}</small></span>
+        <span class="vt-bar"><i style="width:${pct}%"></i></span>
+        ${st?`<span class="vt-st">${st}</span>`:""}
+      </button>
+      <div class="res-head"><span class="res-name"><i style="background:var(${c})"></i>${l}</span><span class="res-val num"><span class="cur">${s.atual}</span> <span class="max">/ ${s.max}</span></span></div>
+      <div class="res-row"><button class="stepper" type="button" data-act="st" data-k="${k}" data-d="-1" aria-label="${l} menos 1">−</button><div class="pips" style="--c:var(${c});--g:var(${g})">${pips}</div><div class="mbar"><i style="width:${Math.max(0,Math.min(100,s.atual/max*100))}%;background:var(${c});box-shadow:0 0 8px var(${g})"></i></div><button class="stepper" type="button" data-act="st" data-k="${k}" data-d="1" aria-label="${l} mais 1">+</button></div>
+      ${edit?`<div class="res-max"><label for="max-${k}">Máximo</label><input class="in n num" id="max-${k}" type="number" data-bind="status.${k}.max" value="${s.max}"></div>`:""}
+    </div>`;
+  }).join("");
+}
+
+/* ---------- Abas ---------- */
+function render(){
+  const active = document.activeElement && document.activeElement.id;
+  renderHeader(); renderStatus();
+  document.querySelectorAll("#tabs a, #bnav a").forEach(a=>a.classList.toggle("active", a.dataset.tab===tab));
+  const fn = {ficha:vFicha, combate:vCombate, rituais:vRituais, habilidades:vHabilidades, inventario:vInventario, lore:vLore, campanha:vCampanha}[tab] || vFicha;
+  $("#main").innerHTML = (!loaded && db) ? `<p class="empty">Abrindo a ficha…</p>` : fn();
+  if(active){ const el=document.getElementById(active); if(el) el.focus(); }
+}
+const modsBar = () => `<div class="mods">
+  <label for="modSaber"><input type="checkbox" id="modSaber" data-act="mod-saber" ${mods.saber?"checked":""}> Saber é Poder: +5 em testes de Intelecto por 2 PE</label>
+  <label for="modBonus">Bônus extra <input class="in n num" id="modBonus" type="number" data-act="mod-bonus" value="${mods.bonus}"></label>
+  <span>PE por turno <b class="num">${peTurno()}</b></span>
+</div>`;
+const T = (txt, extra="") => `<div class="title-row"><h3 class="section-title lead">${txt}</h3>${extra}</div>`;
+
+function vFicha(){
+  const order = ["AGI","FOR","INT","PRE","VIG"];
+  const attrs = order.map(k=>{ const v=Number(S.atributos[k])||0; const dots=Array.from({length:5},(_,i)=>`<span class="dot ${i<v?"on":""}"></span>`).join("");
+    return edit ? `<div class="attr"><input id="at-${k}" class="num" type="number" data-bind="atributos.${k}" value="${v}" aria-label="${k}"><div class="k">${k}</div></div>`
+                : `<button class="attr" type="button" data-act="rollattr" data-k="${k}" title="Rolar ${k}"><div class="v num">${v}</div><div class="dots">${dots}</div><div class="k">${k}</div></button>`; }).join("");
+  const i = S.info;
+  const idf = [["origem","Origem"],["classe","Classe"],["trilha","Trilha"],["patente","Patente"],["nex","NEX (%)"],["deslocamento","Deslocamento"],["jogador","Jogador"],["nome","Personagem"]];
+  const list = SKILLS.filter(([k])=>{ const t=Number(S.pericias[k]?.treino)||0; if(skillFilter==="treinadas") return t>0||skBonus(k)>0; if(skillFilter==="nao") return t===0; return true; });
+  const skills = list.map(([k,n,a,fl,desc])=>{
+    const p=S.pericias[k]||{}; const t=Number(p.treino)||0; const b=skBonus(k); const locked=fl.includes("*")&&t===0; const g=grade(t); const open=openSkills.has(k);
+    return `<div class="skill ${t>0?"trained":""} ${locked?"locked":""}">
+      <div class="skill-head">
+        <button class="skill-name" type="button" data-act="skdesc" data-k="${k}" aria-expanded="${open}">${n}${fl.includes("*")?"*":""}${fl.includes("+")?"+":""} <span class="skill-attr">${a}</span>${g?`<span class="badge">${g}</span>`:""}${k==="intuicao"&&t>0?`<span class="badge bright">via Manual</span>`:""}</button>
+        <button class="skill-roll num" type="button" data-act="rollsk" data-k="${k}" title="Rolar ${n}">${S.atributos[a]||0}d20+${b}</button>
+      </div>
+      ${edit?`<div class="skill-edit"><label for="tr-${k}">Treino</label><input class="in n num" id="tr-${k}" type="number" step="5" data-bind="pericias.${k}.treino" value="${t}"><label for="ou-${k}">Outros</label><input class="in n num" id="ou-${k}" type="number" data-bind="pericias.${k}.outros" value="${Number(p.outros)||0}"></div>`:""}
+      ${open?`<div class="skill-desc">${esc(desc)}${locked?" <i>O Aion não é treinado nela, então em regra não pode usá-la.</i>":""}</div>`:""}
+    </div>`;
+  }).join("");
+  return `${modsBar()}<div class="grid">
+    <div class="stack">
+      <div class="portrait-wrap"><img src="assets/aion-portrait.webp" alt="Retrato do Aion"><span class="pc tl"></span><span class="pc tr"></span><span class="pc bl"></span><span class="pc br"></span><div class="portrait-name">ΑΙΩΝ</div></div>
+      <section class="panel">${T("Atributos",'<span class="hint">clique para rolar</span>')}<div class="attr-grid">${attrs}</div></section>
+      <section class="panel">${T("Combate")}
+        <div class="combat">
+          <div class="cstat"><div class="v num">${defesa()}</div><div class="k">Defesa</div>${edit?`<div class="s">equip <input class="in n num" id="def-eq" type="number" data-bind="defesa.equip" value="${S.defesa.equip}"> outros <input class="in n num" id="def-ou" type="number" data-bind="defesa.outros" value="${S.defesa.outros}"></div>`:`<div class="s">10 + AGI</div>`}</div>
+          <div class="cstat"><div class="v num">${bloqueio()}</div><div class="k">Bloqueio</div><div class="s">Fortitude</div></div>
+          <div class="cstat"><div class="v num">${esquiva()}</div><div class="k">Esquiva</div><div class="s">Defesa + Reflexos</div></div>
+          <div class="cstat"><div class="v num">${peTurno()}</div><div class="k">PE / turno</div><div class="s">pelo NEX</div></div>
+          <div class="cstat"><div class="v num">${dtRitual()}</div><div class="k">DT rituais</div><div class="s">10 + PE + PRE</div></div>
+          <div class="cstat"><div class="v num">${circulo()}º</div><div class="k">Círculo</div><div class="s">${temAfinidade()?"com afinidade":"sem afinidade"}</div></div>
+        </div>
+      </section>
+    </div>
+    <div class="stack">
+      <section>
+        <div class="idbar">${idf.map(([k,l])=>`<div class="idcard"><div class="il">${l}</div><div class="iv">${edit?`<input class="in" id="inf-${k}" ${k==="nex"?'type="number" step="5"':""} data-bind="info.${k}" value="${esc(i[k])}">`:esc(k==="nex"?i[k]+"%":i[k])||"—"}</div></div>`).join("")}</div>
+        <div class="idbar" style="grid-template-columns:repeat(3,1fr);margin-top:-1px;border-top:0">${[["proficiencias","Proficiências"],["protecao","Proteção"],["resistencias","Resistências"]].map(([k,l])=>`<div class="idcard"><div class="il">${l}</div><div class="iv">${edit?`<input class="in" id="f-${k}" data-bind="${k}" value="${esc(S[k])}">`:(esc(S[k])||"—")}</div></div>`).join("")}</div>
+        ${edit?`<p class="hint"><label><input type="checkbox" id="inf-af" data-act="afinidade" ${temAfinidade()?"checked":""}> Já escolheu afinidade (NEX 50%)</label></p>`:""}
+      </section>
+      <section class="panel">
+        ${T("Perícias",`<div class="seg" role="group" aria-label="Filtrar perícias"><button type="button" data-act="skf" data-v="todas" class="${skillFilter==="todas"?"on":""}">Todas</button><button type="button" data-act="skf" data-v="treinadas" class="${skillFilter==="treinadas"?"on":""}">Treinadas</button><button type="button" data-act="skf" data-v="nao" class="${skillFilter==="nao"?"on":""}">Sem treino</button></div>`)}
+        <div class="skills">${skills}</div>
+        <p class="legend">* só pode ser usada treinada · + sofre penalidade de carga · clique no nome para ver o que a perícia faz · atributo 0 rola 2d20 e fica com o pior</p>
+      </section>
+    </div>
+  </div>`;
+}
+
+function editBtns(list, i){ return edit?`<div class="actions"><button class="btn small" type="button" data-act="edit" data-list="${list}" data-i="${i}">Editar</button><button class="btn small danger" type="button" data-act="del" data-list="${list}" data-i="${i}">Remover</button></div>`:""; }
+
+/* ---------- Tesoura das Moiras ---------- */
+function vTesoura(){
+  const t = S.tesoura; if(!t) return "";
+  const vs = S.ataques.map((a,i)=>({a,i})).filter(x=>x.a.arma===TESOURA);
+  return `<section class="relic" aria-label="Tesoura das Moiras">
+    <div class="relic-head">
+      <div class="relic-art">${SHEARS_ART}</div>
+      <div style="flex:1;min-width:220px">
+        <div class="relic-kicker">Relíquia · Arma do Outro Lado</div>
+        <h2>Tesoura das Moiras</h2>
+        <div class="epi">Fiar, medir, cortar. A arma de quem decide quando um fio acaba, nas mãos de alguém que escapou do próprio corte.</div>
+        <div class="relic-pills"><span class="badge bright">Morte</span><span class="badge">1d6 corte</span><span class="badge">Crítico 19 / x2</span><span class="badge">Adjacente</span><span class="badge">Uma mão</span><span class="badge">Não ocupa espaço</span></div>
+      </div>
+      
+    </div>
+
+    ${vs.length?`<div style="margin-top:22px;position:relative">${T("Formas de ataque",`<span class="hint">acertar já puxa o fio de Cloto</span>`)}<div class="variants">${vs.map(x=>variantCard(x.a,x.i)).join("")}</div></div>`:""}
+
+    <div class="relic-flow">
+      <div class="flow-step"><div class="n">I</div><div class="t">Acerte e marque</div><div class="d">Todo acerto puxa o fio de Cloto. Escolha o alvo principal do combate e marque.</div></div>
+      <div class="flow-step"><div class="n">II</div><div class="t">Corte o que importa</div><div class="d">Logo após acertar, pague 2 PE e tire do alvo uma opção por 3 rodadas. Uma vez por cena.</div></div>
+      <div class="flow-step"><div class="n">III</div><div class="t">Espere ele chegar</div><div class="d">Se o alvo vier até você por vontade própria e ficar a 3 m, gaste uma ação e corte o fio.</div></div>
+    </div>
+
+    <div class="moirai">
+      <div class="moira">
+        <div class="who">Cloto · a que fia</div><h3>Marca Fio do Destino</h3><div class="where">gravada no arco traseiro</div>
+        <div class="when"><span class="badge">Ao acertar</span><span class="badge">Grátis</span></div>
+        <p>Quando a tesoura acerta uma criatura, ela fica presa ao fio. Só uma criatura carrega a marca por vez: marcar outra solta a anterior.</p>
+        <div class="state"><div class="live">Marcado: <b>${t.marcado?esc(t.marcado):"ninguém"}</b></div>
+          <div class="actions" style="margin-top:0"><button class="btn small" type="button" data-act="ts-mark">${t.marcado?"Trocar alvo":"Marcar alvo"}</button>${t.marcado?`<button class="btn small ghost" type="button" data-act="ts-unmark">Soltar</button>`:""}</div></div>
+      </div>
+      <div class="moira black">
+        <div class="who">Átropos · a que corta</div><h3>Corte de Átropos</h3><div class="where">gravada na lâmina negra</div>
+        <div class="when"><span class="badge">Após acertar</span><span class="badge bright">2 PE</span><span class="badge">1 por cena</span></div>
+        <p>Corta uma opção do alvo por 3 rodadas: o ataque especial de um chefe, uma reação, uma proteção mágica.</p>
+        <div class="limits">Não remove ações inteiras, imunidades fundamentais nem passivas permanentes.</div>
+        <div class="state"><div class="live">${t.corte&&t.corte.rodadas>0?`Cortado: <b>${esc(t.corte.opcao)}</b>${t.corte.alvo?` de ${esc(t.corte.alvo)}`:""} · <b class="num">${t.corte.rodadas}</b> rodada${t.corte.rodadas>1?"s":""}`:t.corteUsado?"Já usado nesta cena":"Disponível nesta cena"}</div>
+          <div class="actions" style="margin-top:0"><button class="btn small ${t.corteUsado?"":"primary"}" type="button" data-act="ts-cut" ${t.corteUsado?"disabled":""}>Cortar (−2 PE)</button>${t.corte&&t.corte.rodadas>0?`<button class="btn small" type="button" data-act="ts-round">Passar rodada</button>`:""}</div></div>
+      </div>
+      <div class="moira silver">
+        <div class="who">Láquesis · a que mede</div><h3>Medida de Láquesis</h3><div class="where">gravada na lâmina prateada</div>
+        <div class="when"><span class="badge">1 ação</span><span class="badge">3 m</span><span class="badge">DT ${dtRitual()}</span></div>
+        <p>Se o alvo se aproximar voluntariamente a 3 metros e continuar ali, gaste uma ação para medir e cortar o fio: <b class="num">2d8</b> de dano de Morte.</p>
+        <div class="limits">O alvo resiste contra a DT dos seus rituais (${dtRitual()}); se passar, sofre metade.</div>
+        <div class="state"><div class="actions" style="margin-top:0"><button class="btn small primary" type="button" data-act="ts-measure">Cortar o fio (2d8)</button></div></div>
+      </div>
+    </div>
+    <div class="relic-foot"><span>Combina com a rotina: amaldiçoe a tesoura no turno 1 e cada acerto ainda soma o dano extra do ritual.</span><button class="btn small ghost" type="button" data-act="ts-scene">Nova cena</button></div>
+  </section>`;
+}
+
+const TESOURA = "Tesoura das Moiras";
+function variantCard(a,i){
+  const sk = SKILLS.find(s=>s[0]===a.pericia)||SKILLS[15]; const bonus = skBonus(a.pericia)+(Number(a.bonusAtk)||0); const fa = Number(S.atributos[a.atributoDano])||0;
+  const ex = String(a.extra||""); const am = /conhecimento/i.test(ex), dc = /morte/i.test(ex);
+  const full = am&&dc;
+  const total = [`${a.dano}${fa?`+${fa}`:""}`].concat(ex.split(",").map(x=>x.trim()).filter(Boolean).map(x=>x.replace(/\s.*$/,""))).join(" + ");
+  return `<div class="variant ${full?"full":""}">
+    <div class="vt">${esc(a.variante||a.nome)}</div>
+    <div class="chips">${am?`<span class="chip-r am">Amaldiçoar Arma</span>`:""}${dc?`<span class="chip-r dc">Decadência</span>`:""}${!am&&!dc?`<span class="chip-r no">sem ritual</span>`:""}</div>
+    <div class="line"><b>Teste</b><span class="num">${S.atributos[sk[2]]||0}d20+${bonus}</span> ${sk[1]}</div>
+    <div class="line"><b>Dano</b><span class="tot num">${esc(total)}</span><br>${esc(a.tipo)}${am?" · Conhecimento":""}${dc?" · Morte":""}</div>
+    <div class="cost num">${Number(a.custo)?`${a.custo} PE no ataque`:"sem custo no ataque"}</div>
+    ${a.nota?`<div class="vnote">${esc(a.nota)}</div>`:""}
+    <div class="actions"><button class="btn small primary" type="button" data-act="atk" data-i="${i}">Atacar</button><button class="btn small" type="button" data-act="dmg" data-i="${i}" data-crit="0">Dano</button><button class="btn small" type="button" data-act="dmg" data-i="${i}" data-crit="1">Crítico</button></div>
+    ${editBtns("ataques",i)}
+  </div>`;
+}
+function vCombate(){
+  const groups = {};
+  S.ataques.forEach((a,i)=>{ const w=a.arma||a.nome; if(w===TESOURA) return; (groups[w]=groups[w]||[]).push({a,i}); });
+  const weapons = Object.entries(groups).map(([w,list])=>{ const b=list[0].a;
+    return `<div class="weapon"><div class="weapon-head"><h4>${esc(w)}</h4><span class="ws num">${esc(b.dano)} ${esc(b.tipo).toLowerCase()} · crítico ${b.critMargem||20} / x${b.critMult||2}${b.alcance?" · "+esc(b.alcance).toLowerCase():""}${b.empunhadura?" · "+esc(b.empunhadura):""}</span></div>
+      <div class="variants">${list.map(x=>variantCard(x.a,x.i)).join("")}</div></div>`; }).join("");
+  return `${modsBar()}<div class="stack">
+    ${vTesoura()}
+    <section class="panel">${T("Ataques", edit?`<button class="btn small primary" type="button" data-act="new" data-list="ataques">Novo ataque</button>`:`<span class="hint">tirar na margem de crítico dobra só os dados da arma</span>`)}${weapons||`<p class="empty">Nenhum ataque cadastrado.</p>`}</section>
+    <section class="panel">${T("Rotina de combate")}<p style="margin:0;color:var(--ink-soft)">Turno 1: Amaldiçoar Arma com Lâmina Maldita (2 PE, ação de movimento) e ataque com Ocultismo na mesma rodada. Daí em diante a arma fica amaldiçoada a cena toda, então use as formas Amaldiçoada e, quando o PE permitir, a combinada com Decadência. Contra um chefe, prefira a tesoura: marque, corte a habilidade mais perigosa dele e segure a Medida para quando ele encostar. Guarde PE para Cicatrização se alguém cair.</p></section>
+  </div>`;
+}
+
+function formLocked(f){
+  const r=[]; if(Number(f.reqCirculo)>circulo()) r.push(`requer ${f.reqCirculo}º círculo`); if(f.afinidade&&!temAfinidade()) r.push("requer afinidade"); return r;
+}
+function vRituais(){
+  const cards = S.rituais.map((r,i)=>{
+    const open = openRit.has(r.id||i); const sym = SIGILS[String(r.nome).toLowerCase()];
+    const ups = (r.formas||[]).map((f,j)=>{ const lk=formLocked(f);
+      return `<div class="upgrade ${lk.length?"locked":""}"><div class="ut">${esc(f.nome)}<small class="num">${f.custo} PE</small></div><div>${f.rolagem?`<span class="roll num">${esc(f.rolagem)}</span>`:""}${esc(f.efeito)}${lk.length?`<span class="lk">${lk.join(", ")}</span>`:""}</div><button class="btn small ${lk.length?"":"primary"}" type="button" data-act="cast" data-i="${i}" data-j="${j}" ${lk.length?"disabled":""}>Conjurar</button></div>`; }).join("");
+    return `<article class="ritual ${open?"open":""}">
+      <button class="r-head" type="button" data-act="rit" data-k="${esc(r.id||i)}" aria-expanded="${open}">
+        <span class="sigil">${sym?`<i class="sym" style="--sym:url(assets/${sym}.webp)"></i>`:`<span class="fallback">◬</span>`}</span>
+        <span class="r-body"><span class="r-name">${esc(r.nome)}</span><span class="r-elem el-${slug(r.elemento)}">${esc(r.elemento)} ${esc(r.circulo)}</span><br><span class="r-meta">${[r.execucao,r.alcance,r.alvo,r.resistencia||r.duracao].filter(Boolean).map(esc).join(" · ")}</span></span>
+        ${chev}
+      </button>
+      ${open?`<div class="r-more"><div class="r-stats"><div class="r-stat"><b>Execução</b>${esc(r.execucao)}</div><div class="r-stat"><b>Alcance</b>${esc(r.alcance)}</div><div class="r-stat"><b>Alvo</b>${esc(r.alvo)}</div><div class="r-stat"><b>Duração</b>${esc(r.duracao)}</div>${r.resistencia?`<div class="r-stat"><b>Resistência</b>${esc(r.resistencia)}</div>`:""}</div><p class="r-desc">${esc(r.desc)}</p>${ups}${editBtns("rituais",i)}</div>`:""}
+    </article>`;
+  }).join("");
+  return `<section class="panel">${T("Rituais",`<span class="hint">DT ${dtRitual()} · até ${circulo()}º círculo · ${S.rituais.length} conhecidos</span>${edit?`<button class="btn small primary" type="button" data-act="new" data-list="rituais">Novo ritual</button>`:""}`)}<div class="cards">${cards||`<p class="empty">Nenhum ritual.</p>`}</div></section>`;
+}
+
+function vHabilidades(){
+  const cards = S.habilidades.map((h,i)=>`<article class="ability"><div class="ab-head"><div class="ab-left"><h4>${esc(h.nome)}</h4>${h.fonte?`<span class="badge">${esc(h.fonte)}</span>`:""}</div></div><p>${esc(h.desc)}</p>${editBtns("habilidades",i)}</article>`).join("");
+  return `<section class="panel">${T("Habilidades", edit?`<button class="btn small primary" type="button" data-act="new" data-list="habilidades">Nova habilidade</button>`:"")}<div class="cards">${cards||`<p class="empty">Nenhuma habilidade.</p>`}</div></section>`;
+}
+
+function itemIcon(it){ const n=slug(it.nome); if(it.reliquia) return ICO.shears; if(n.includes("bastao")) return ICO.staff; if(n.includes("amuleto")) return ICO.amulet; if(n.includes("mochila")) return ICO.pack; if(n.includes("manual")) return ICO.book; if(n.includes("componente")) return ICO.vial; if(n.includes("bandoleira")) return ICO.belt; return ICO.rune; }
+function vInventario(){
+  const conta = it => !it.pendente && !it.reliquia;
+  const usados = S.itens.filter(conta).reduce((a,it)=>a+(Number(it.espacos)||0),0); const max=Number(S.inventario.cargaMax)||0; const inv=S.inventario;
+  const top = `<div class="inv-top">${[["prestigio","Prestígio"],["limiteCredito","Crédito"],["limiteItens","Limite de itens I/II/III/IV"],["cargaMax","Carga máxima"]].map(([k,l])=>`<div class="cstat"><div class="v num" style="font-size:19px">${edit?`<input class="in" id="inv-${k}" data-bind="inventario.${k}" ${k==="cargaMax"||k==="prestigio"?'type="number"':""} value="${esc(inv[k])}">`:esc(inv[k])}</div><div class="k">${l}</div></div>`).join("")}
+    <div class="cstat"><div class="v num" style="font-size:19px;color:${usados>max?"var(--hp)":"var(--ink)"}">${usados} / ${max}</div><div class="k">Espaços usados</div><div class="load"><i style="width:${Math.min(100,usados/(max||1)*100)}%"></i></div></div></div>`;
+  const items = [...S.itens].map((it,i)=>({it,i})).sort((a,b)=>(b.it.reliquia?1:0)-(a.it.reliquia?1:0)).map(({it,i})=>`<div class="inv-item ${it.reliquia?"relic-item":""}">
+      <div class="inv-ico">${itemIcon(it)}</div>
+      <div class="inv-body"><div class="inv-name">${esc(it.nome)} ${it.reliquia?`<span class="badge bright">Relíquia · não ocupa espaço</span>`:`<span class="badge">Cat. ${esc(it.categoria)}</span><span class="badge num">${esc(it.espacos)} espaço${Math.abs(it.espacos)===1?"":"s"}</span>`}${it.pendente?`<span class="badge">pendente</span>`:""}</div>
+        ${it.tipo?`<div class="hint">${esc(it.tipo)}</div>`:""}<div class="inv-desc">${esc(it.desc)}</div>${editBtns("itens",i)}</div>
+    </div>`).join("");
+  return `<section class="panel">${T("Inventário", edit?`<button class="btn small primary" type="button" data-act="new" data-list="itens">Novo item</button>`:"")}${top}<div>${items||`<p class="empty">Inventário vazio.</p>`}</div></section>`;
+}
+
+function vLore(){
+  const L=S.lore, i=S.info;
+  const ps = String(L.texto||"").split(/\n\s*\n/).filter(Boolean);
+  const body = ps.map((p,n)=>{ let h=esc(p).replace("ΑΙΩΝ",'<span style="font-family:var(--display);letter-spacing:.12em;color:var(--gold-bright);font-weight:600">ΑΙΩΝ</span>'); return `<p class="${n===0?"first":""}">${h}</p>${n===2&&L.citacao?`<div class="pull">${esc(L.citacao)}</div>`:""}`; }).join("");
+  if(edit) return `<section class="panel"><div class="note-form">
+      <label class="hint" for="lo-tit">Título</label><input class="in" id="lo-tit" data-bind="lore.titulo" value="${esc(L.titulo)}">
+      <label class="hint" for="lo-cit">Citação</label><input class="in" id="lo-cit" data-bind="lore.citacao" value="${esc(L.citacao)}">
+      <label class="hint" for="lo-txt">História (linha em branco separa parágrafos)</label><textarea class="in" id="lo-txt" style="min-height:440px" data-bind="lore.texto">${esc(L.texto)}</textarea>
+      ${[["idade","Idade"],["nacionalidade","Nacionalidade"],["idiomas","Idiomas"],["ambientacao","Ambientação"],["aparencia","Aparência"]].map(([k,l])=>`<label class="hint" for="lo-${k}">${l}</label><input class="in" id="lo-${k}" data-bind="info.${k}" value="${esc(i[k])}">`).join("")}
+    </div></section>`;
+  return `<article class="lore"><div class="dropline">— ${esc(L.titulo)} —</div>${body||`<p class="empty">Sem lore escrita.</p>`}</article>
+    <div class="lore-facts"><div class="idbar" style="grid-template-columns:repeat(3,1fr)">${[["idade","Idade"],["nacionalidade","Nacionalidade"],["idiomas","Idiomas"]].map(([k,l])=>`<div class="idcard"><div class="il">${l}</div><div class="iv">${esc(i[k])||"—"}</div></div>`).join("")}</div>
+    <div class="idbar" style="grid-template-columns:1fr 1fr;margin-top:-1px">${[["ambientacao","Ambientação"],["aparencia","Aparência"]].map(([k,l])=>`<div class="idcard"><div class="il">${l}</div><div class="iv" style="font-family:var(--body);font-size:16px;font-style:italic;color:var(--ink-soft)">${esc(i[k])||"—"}</div></div>`).join("")}</div></div>`;
+}
+
+function vCampanha(){
+  const ts=[...tarefas].sort((a,b)=>(a.feito-b.feito)||((a.criado||0)-(b.criado||0))); const visT=ts.filter(t=>showDone||!t.feito); const pend=tarefas.filter(t=>!t.feito).length;
+  const ns=[...notas].filter(n=>noteFilter==="Todas"||n.tag===noteFilter).sort((a,b)=>((b.fixada?1:0)-(a.fixada?1:0))||((b.criado||0)-(a.criado||0)));
+  const fmt=ms=>ms?new Date(ms).toLocaleDateString("pt-BR",{day:"2-digit",month:"short"}):"";
+  return `<div class="grid-even">
+    <section class="panel">${T("Para fazer",`<span class="hint num">${pend} pendente${pend===1?"":"s"}</span>`)}
+      <form class="add-row" id="todoForm"><input class="in" id="todoIn" placeholder="Ex.: perguntar ao mestre sobre os sigilos" autocomplete="off" aria-label="Nova tarefa"><button class="btn primary" type="submit">Adicionar</button></form>
+      <ul class="todo">${visT.map(t=>`<li class="${t.feito?"done":""}"><input type="checkbox" id="td-${t.id}" data-act="todo-toggle" data-id="${t.id}" ${t.feito?"checked":""} aria-label="Concluir tarefa"><span class="tx">${esc(t.texto)}</span><button class="x" type="button" data-act="todo-del" data-id="${t.id}" aria-label="Apagar tarefa">✕</button></li>`).join("")||`<li class="empty" style="border:0;background:none">Nada pendente.</li>`}</ul>
+      <div class="actions"><button class="btn small ghost" type="button" data-act="todo-showdone">${showDone?"Esconder concluídas":"Mostrar concluídas"}</button></div>
+    </section>
+    <section class="panel">${T("Anotações",`<span class="hint num">${notas.length} no total</span>`)}
+      <form class="note-form" id="noteForm">
+        <div class="row"><input class="in" id="noteTit" placeholder="Título: NPC, pista, local…" autocomplete="off" aria-label="Título"><select class="in" id="noteTag" aria-label="Categoria">${NOTE_TAGS.map(t=>`<option>${t}</option>`).join("")}</select></div>
+        <textarea class="in" id="noteTxt" placeholder="O que aconteceu, quem apareceu, o que ficou no ar…" aria-label="Texto"></textarea>
+        <div class="actions" style="margin-top:0"><button class="btn primary" type="submit" id="noteSubmit">Salvar anotação</button><button class="btn ghost" type="button" id="noteCancel" style="display:none">Cancelar edição</button></div>
+      </form>
+      <div class="tag-filter">${["Todas",...NOTE_TAGS].map(t=>`<button type="button" data-act="nf" data-v="${t}" class="${noteFilter===t?"on":""}">${t}${t==="Todas"?"":` <span class="num">${notas.filter(n=>n.tag===t).length}</span>`}</button>`).join("")}</div>
+      <div class="notes">${ns.map(n=>`<article class="note ${n.fixada?"pin":""}"><div class="note-h"><div><span class="ntag ${esc(n.tag)}">${esc(n.tag)}</span> <span class="when">${fmt(n.criado)}${n.fixada?" · fixada":""}</span><h4>${esc(n.titulo||"Sem título")}</h4></div>
+        <span class="actions" style="margin-top:0"><button class="btn small ghost" type="button" data-act="note-pin" data-id="${n.id}">${n.fixada?"Desafixar":"Fixar"}</button><button class="btn small ghost" type="button" data-act="note-edit" data-id="${n.id}">Editar</button><button class="btn small ghost danger" type="button" data-act="note-del" data-id="${n.id}">Apagar</button></span></div>
+        ${n.texto?`<p>${esc(n.texto)}</p>`:""}</article>`).join("")||`<p class="empty">Nenhuma anotação nesta categoria.</p>`}</div>
+    </section>
+  </div>
+  <section class="panel" style="margin-top:28px">${T("Conta e backup")}
+    <div class="conta"><span class="who">${window.AionAuth&&window.AionAuth.email()?"Conectado como "+esc(window.AionAuth.email()):""}</span>
+      <button class="btn small" type="button" data-act="conta-export">Exportar backup</button>
+      <button class="btn small" type="button" data-act="conta-import">Importar backup</button>
+      <button class="btn small danger" type="button" data-act="conta-sair">Sair</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden></div>
+  </section>`;
+}
+
+/* ---------- Editor (modal) ---------- */
+const SCHEMAS = {
+  ataques:{title:"ataque", fields:[["arma","Arma (agrupa as variações)"],["variante","Nome da variação"],["nome","Nome completo"],["empunhadura","Empunhadura"],["dano","Dado de dano (ex.: 1d8)"],["tipo","Tipo de dano"],["pericia","Perícia do teste","skill"],["bonusAtk","Bônus de ataque","n"],["atributoDano","Atributo somado ao dano","attr"],["critMargem","Margem de crítico","n"],["critMult","Multiplicador","n"],["extra","Dano extra (ex.: 1d6 Conhecimento, 3d8+3 Morte)"],["custo","Custo em PE","n"],["alcance","Alcance"],["nota","Observação","area"]]},
+  habilidades:{title:"habilidade", fields:[["nome","Nome"],["fonte","Origem (classe, trilha, origem…)"],["desc","Descrição","area"]]},
+  itens:{title:"item", fields:[["nome","Nome"],["categoria","Categoria"],["espacos","Espaços","n"],["tipo","Tipo"],["desc","Descrição","area"],["pendente","Pendente (não conta na carga)","bool"],["reliquia","Relíquia (não ocupa espaço)","bool"]]},
+  rituais:{title:"ritual", fields:[["nome","Nome"],["elemento","Elemento","el"],["circulo","Círculo","n"],["execucao","Execução"],["alcance","Alcance"],["alvo","Alvo"],["duracao","Duração"],["resistencia","Resistência"],["desc","Descrição","area"],["formasTxt","Formas (uma por linha: Nome | custo | rolagem | efeito | círculo exigido | afinidade s/n)","area"]]},
+  tesoura:{title:"Tesoura das Moiras", fields:[["dano","Dado de dano da arma (deixe vazio se ainda não souber)"],["atributoDano","Atributo somado ao dano","attr"],["pericia","Perícia do teste","skill"],["critMargem","Margem de crítico","n"],["critMult","Multiplicador","n"],["extra","Dano extra (ex.: 1d6 Conhecimento)"]]}
+};
+let modalCtx = null;
+function openModal(list, i){
+  const sc=SCHEMAS[list]; const isNew=i==null && list!=="tesoura";
+  const obj = list==="tesoura" ? structuredClone(S.tesoura||{}) : isNew ? {} : structuredClone(S[list][i]);
+  if(list==="rituais") obj.formasTxt=(obj.formas||[]).map(f=>[f.nome,f.custo,f.rolagem||"",f.efeito||"",f.reqCirculo||1,f.afinidade?"s":"n"].join(" | ")).join("\n");
+  modalCtx={list,i};
+  $("#modalTitle").textContent = list==="tesoura" ? sc.title : (isNew?"Novo ":"Editar ")+sc.title;
+  const inp=([k,l,t])=>{ const v=obj[k]??""; const id="m-"+k;
+    if(t==="area") return `<div class="f"><label for="${id}">${l}</label><textarea class="in" id="${id}" name="${k}">${esc(v)}</textarea></div>`;
+    if(t==="bool") return `<div class="f"><label><input type="checkbox" id="${id}" name="${k}" ${v?"checked":""}> ${l}</label></div>`;
+    if(t==="skill") return `<div class="f"><label for="${id}">${l}</label><select class="in" id="${id}" name="${k}">${SKILLS.map(s=>`<option value="${s[0]}" ${v===s[0]?"selected":""}>${s[1]}</option>`).join("")}</select></div>`;
+    if(t==="attr") return `<div class="f"><label for="${id}">${l}</label><select class="in" id="${id}" name="${k}"><option value="">Nenhum</option>${["FOR","AGI","INT","PRE","VIG"].map(a=>`<option ${v===a?"selected":""}>${a}</option>`).join("")}</select></div>`;
+    if(t==="el") return `<div class="f"><label for="${id}">${l}</label><select class="in" id="${id}" name="${k}">${ELEMENTS.map(a=>`<option ${v===a?"selected":""}>${a}</option>`).join("")}</select></div>`;
+    return `<div class="f"><label for="${id}">${l}</label><input class="in" id="${id}" name="${k}" ${t==="n"?'type="number"':""} value="${esc(v)}"></div>`; };
+  $("#modalForm").innerHTML = sc.fields.map(inp).join("") + `<div class="acts"><button class="btn" type="button" id="mCancel">Cancelar</button><button class="btn primary" type="submit">Salvar</button></div>`;
+  $("#modalBg").classList.add("open");
+  setTimeout(()=>{ const f=$("#modalForm input, #modalForm textarea, #modalForm select"); f&&f.focus(); },0);
+}
+function closeModal(){ $("#modalBg").classList.remove("open"); modalCtx=null; }
+$("#modalForm").addEventListener("submit", e=>{
+  e.preventDefault(); if(!modalCtx) return;
+  const {list,i}=modalCtx; const sc=SCHEMAS[list]; const fd=new FormData(e.target);
+  const obj = list==="tesoura" ? structuredClone(S.tesoura||{}) : i==null ? {} : structuredClone(S[list][i]);
+  sc.fields.forEach(([k,,t])=>{ if(t==="bool") obj[k]=!!$("#m-"+k).checked; else if(t==="n") obj[k]=Number(fd.get(k))||0; else obj[k]=String(fd.get(k)??""); });
+  if(list==="rituais"){ obj.formas=obj.formasTxt.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{ const p=l.split("|").map(x=>x.trim()); return {nome:p[0]||"Normal",custo:Number(p[1])||0,rolagem:p[2]||"",efeito:p[3]||"",reqCirculo:Number(p[4])||1,afinidade:/^s/i.test(p[5]||"")}; }); delete obj.formasTxt; }
+  if(list==="tesoura") S.tesoura=obj;
+  else { if(!obj.id) obj.id=uid(); if(i==null) S[list].push(obj); else S[list][i]=obj; }
+  closeModal(); queueSave(); render();
+});
+$("#modalBg").addEventListener("click", e=>{ if(e.target.id==="modalBg"||e.target.id==="mCancel") closeModal(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"&&modalCtx) closeModal(); });
+
+/* ---------- Pedido de texto curto (substitui prompt) ---------- */
+function askText(title, label, cb){
+  modalCtx={list:"__ask"};
+  $("#modalTitle").textContent=title;
+  $("#modalForm").innerHTML=`<div class="f"><label for="m-ask">${label}</label><input class="in" id="m-ask" autocomplete="off"></div><div class="acts"><button class="btn" type="button" id="mCancel">Cancelar</button><button class="btn primary" type="button" id="mOk">Confirmar</button></div>`;
+  $("#modalBg").classList.add("open"); setTimeout(()=>$("#m-ask").focus(),0);
+  const ok=()=>{ const v=$("#m-ask").value.trim(); closeModal(); cb(v); };
+  $("#mOk").onclick=ok; $("#m-ask").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); ok(); } };
+}
+
+
+/* ---------- Ajuste rápido de Vida / Sanidade / Esforço ---------- */
+const VIT = {pv:{l:"Vida",c:"--hp",g:"--hp-g",down:"Dano",up:"Cura"}, san:{l:"Sanidade",c:"--san",g:"--san-g",down:"Perder",up:"Recuperar"}, pe:{l:"Esforço",c:"--eff",g:"--eff-g",down:"Gastar",up:"Recuperar"}};
+function vitalSheetHTML(k){
+  const v=VIT[k], s=S.status[k]; const max=Math.max(1,Number(s.max)||1); const pct=Math.max(0,Math.min(100,s.atual/max*100));
+  const note = k==="pe"?`Limite por turno: ${peTurno()} PE`: k==="pv"?(s.atual<=0?"Morrendo: role Fortitude a cada turno":""):(s.atual<=0?"Enlouquecendo":"");
+  return `<div class="vs" style="--c:var(${v.c});--g:var(${v.g})">
+    <div class="vs-top"><div class="vs-big num"><b>${s.atual}</b><span>/ ${s.max}</span></div><div class="vs-note">${note}</div></div>
+    <div class="vs-bar"><i style="width:${pct}%"></i></div>
+    <div class="vs-step"><button class="vbtn down" type="button" data-act="vs-step" data-k="${k}" data-d="-5">−5</button><button class="vbtn down" type="button" data-act="vs-step" data-k="${k}" data-d="-1">−1</button><button class="vbtn up" type="button" data-act="vs-step" data-k="${k}" data-d="1">+1</button><button class="vbtn up" type="button" data-act="vs-step" data-k="${k}" data-d="5">+5</button></div>
+    <div class="vs-amt"><input class="in num" id="vsAmt" type="number" inputmode="numeric" min="0" placeholder="Valor" aria-label="Valor"><button class="vbtn down" type="button" data-act="vs-apply" data-k="${k}" data-dir="-1">${v.down}</button><button class="vbtn up" type="button" data-act="vs-apply" data-k="${k}" data-dir="1">${v.up}</button></div>
+    <div class="vs-foot"><button class="btn small" type="button" data-act="vs-full" data-k="${k}">Encher</button><label for="vsMax">Máximo <input class="in num" id="vsMax" type="number" inputmode="numeric" value="${s.max}" data-act="vs-max" data-k="${k}"></label></div>
+  </div>`;
+}
+function openVital(k){
+  modalCtx={list:"__vital",k};
+  $("#modalTitle").textContent=VIT[k].l;
+  $("#modalForm").innerHTML=vitalSheetHTML(k)+`<div class="acts"><button class="btn primary" type="button" id="mCancel">Pronto</button></div>`;
+  $("#modalBg").classList.add("open");
+}
+function refreshVital(){ if(modalCtx&&modalCtx.list==="__vital"){ const amt=$("#vsAmt")&&$("#vsAmt").value; openVital(modalCtx.k); if(amt) $("#vsAmt").value=amt; } }
+function changeVital(k, d){
+  const s=S.status[k]; s.atual=Math.max(k==="pv"?-99:0, Math.min(Number(s.max)||0, s.atual+d));
+  if(navigator.vibrate) navigator.vibrate(8);
+  queueSave(); renderStatus(); refreshVital();
+}
+/* ---------- Ações ---------- */
+function setPath(path,val){ const ks=path.split("."); let o=S; for(let i=0;i<ks.length-1;i++){ if(o[ks[i]]==null) o[ks[i]]={}; o=o[ks[i]]; } o[ks[ks.length-1]]=val; }
+function rollAttackLike(a, label, doTest, forceCrit=false){
+  const sk=SKILLS.find(s=>s[0]===a.pericia)||SKILLS[15]; let crit=forceCrit, head="";
+  if(doTest){ const r=rollTest(sk[2], skBonus(a.pericia)+(Number(a.bonusAtk)||0)); crit=r.pick>=(Number(a.critMargem)||20); head=`Ataque ${r.total}${crit?" · CRÍTICO":""} (${r.txt})`; }
+  if(!a.dano){ log(label, doTest?head.split(" (")[0]:"—", (head?head+" · ":"")+"dano da arma não cadastrado", crit?"crit":""); return; }
+  const base=rollExpr(a.dano, crit?(Number(a.critMult)||2):1); const fa=Number(S.atributos[a.atributoDano])||0; let total=base.total+fa;
+  const parts=[`${a.tipo||"arma"} ${base.txt}${fa?` +${fa}`:""}`];
+  String(a.extra||"").split(",").map(x=>x.trim()).filter(Boolean).forEach(x=>{ const m=x.match(/^([\dd+\-\s]+)\s*(.*)$/i); if(!m) return; const r=rollExpr(m[1]); total+=r.total; parts.push(`${m[2]||"extra"} ${r.txt}=${r.total}`); });
+  log(label, `${total} de dano`, (head?head+" · ":"")+parts.join(" · "), crit?"crit":"");
+}
+document.addEventListener("change", e=>{
+  const b=e.target.dataset.bind;
+  if(b){ setPath(b, e.target.type==="number"?(Number(e.target.value)||0):e.target.value); queueSave(); render(); return; }
+  const a=e.target.dataset.act;
+  if(a==="vs-max"){ const k=e.target.dataset.k; S.status[k].max=Math.max(1,Number(e.target.value)||1); S.status[k].atual=Math.min(S.status[k].atual,S.status[k].max); queueSave(); renderStatus(); refreshVital(); return; }
+  if(e.target.id==="importFile"){ importBackup(e.target.files[0]); e.target.value=""; return; }
+  if(a==="mod-saber") mods.saber=e.target.checked;
+  if(a==="mod-bonus") mods.bonus=Number(e.target.value)||0;
+  if(a==="afinidade"){ S.info.afinidade=e.target.checked; queueSave(); render(); }
+  if(a==="todo-toggle"){ const id=e.target.dataset.id; dbWrite(()=>db.doc("tarefas/"+id).update({feito:e.target.checked})); }
+});
+document.addEventListener("click", e=>{
+  if(e.target.id==="noteCancel"){ const f=$("#noteForm"); delete f.dataset.editing; f.reset(); $("#noteSubmit").textContent="Salvar anotação"; e.target.style.display="none"; return; }
+  const el=e.target.closest("[data-act]"); if(!el||el.tagName==="INPUT") return;
+  const a=el.dataset.act; const t=S.tesoura;
+  if(a==="vsheet"){ openVital(el.dataset.k); return; }
+  if(a==="vs-step"){ changeVital(el.dataset.k, Number(el.dataset.d)); return; }
+  if(a==="vs-apply"){ const n=Math.abs(Number($("#vsAmt").value)||0); if(!n) { $("#vsAmt").focus(); return; } changeVital(el.dataset.k, n*Number(el.dataset.dir)); $("#vsAmt").value=""; return; }
+  if(a==="vs-full"){ const s=S.status[el.dataset.k]; changeVital(el.dataset.k, s.max - s.atual); return; }
+  if(a==="conta-export"){ exportBackup(); return; }
+  if(a==="conta-import"){ $("#importFile").click(); return; }
+  if(a==="conta-sair"){ if(el.dataset.confirm==="1"){ window.AionAuth&&window.AionAuth.signOut(); } else { el.dataset.confirm="1"; el.textContent="Tocar de novo para sair"; } return; }
+  if(a==="st"){ const s=S.status[el.dataset.k]; s.atual=Math.max(el.dataset.k==="pv"?-99:0, Math.min(s.max, s.atual+Number(el.dataset.d))); queueSave(); renderStatus(); }
+  else if(a==="pip"){ const s=S.status[el.dataset.k]; const v=Number(el.dataset.v); s.atual = (s.atual===v)? v-1 : v; queueSave(); renderStatus(); }
+  else if(a==="rollattr"){ const k=el.dataset.k; const r=rollTest(k,0); log(`Teste de ${k}`, r.total, r.txt, r.nat20?"crit":r.nat1?"fail":""); }
+  else if(a==="rollsk"){ const k=el.dataset.k; const sk=SKILLS.find(s=>s[0]===k); const r=rollTest(sk[2], skBonus(k)); log(sk[1], r.total, r.txt, r.nat20?"crit":r.nat1?"fail":""); }
+  else if(a==="skdesc"){ const k=el.dataset.k; openSkills.has(k)?openSkills.delete(k):openSkills.add(k); render(); }
+  else if(a==="skf"){ skillFilter=el.dataset.v; render(); }
+  else if(a==="rit"){ const k=el.dataset.k; openRit.has(k)?openRit.delete(k):openRit.add(k); render(); }
+  else if(a==="atk"||a==="dmg"){
+    const at=S.ataques[Number(el.dataset.i)];
+    if(a==="atk"){ if(Number(at.custo)&&!spendPE(Number(at.custo),at.nome)) return; rollAttackLike(at, at.nome, true); }
+    else { const crit=el.dataset.crit==="1"; rollAttackLike(at, at.nome+(crit?" · dano crítico":" · dano"), false, crit); }
+  }
+  else if(a==="cast"){
+    const r=S.rituais[Number(el.dataset.i)], f=r.formas[Number(el.dataset.j)]; if(formLocked(f).length) return;
+    if(!spendPE(Number(f.custo)||0, r.nome)) return;
+    if(f.rolagem){ const x=rollExpr(f.rolagem); log(`${r.nome} · ${f.nome}`, x.total, `${x.txt} · DT ${dtRitual()}${r.resistencia?" ("+r.resistencia+")":""} · −${f.custo} PE`); }
+    else log(`${r.nome} · ${f.nome}`, `−${f.custo} PE`, `${f.efeito}${r.resistencia?" · DT "+dtRitual()+" ("+r.resistencia+")":""}`);
+  }
+  else if(a==="ts-atk"&&t){ rollAttackLike(Object.assign({tipo:"Corte"},t), "Tesoura das Moiras", true); }
+  else if(a==="ts-edit"){ openModal("tesoura"); }
+  else if(a==="ts-mark"&&t){ askText("Marca Fio do Destino","Quem foi marcado?", v=>{ if(!v) return; t.marcado=v; queueSave(); render(); log("Marca Fio do Destino", v, "Única criatura marcada pela tesoura."); }); }
+  else if(a==="ts-unmark"&&t){ t.marcado=""; queueSave(); render(); }
+  else if(a==="ts-cut"&&t){ if(t.corteUsado) return; askText("Corte de Átropos","O que você corta do alvo? (ex.: rugido, reação, armadura)", v=>{ if(!v) return; if(!spendPE(2,"Corte de Átropos")) return; t.corteUsado=true; t.corte={opcao:v, alvo:t.marcado||"", rodadas:3}; queueSave(); render(); log("Corte de Átropos", "−2 PE", `${v} cortado por 3 rodadas${t.marcado?" de "+t.marcado:""}.`); }); }
+  else if(a==="ts-round"&&t&&t.corte){ t.corte.rodadas=Math.max(0,t.corte.rodadas-1); queueSave(); render(); }
+  else if(a==="ts-measure"){ const x=rollExpr("2d8"); log("Medida de Láquesis", `${x.total} de Morte`, `${x.txt} · se passar na DT ${dtRitual()}, sofre ${Math.floor(x.total/2)}`); }
+  else if(a==="ts-scene"&&t){ t.corteUsado=false; t.corte=null; t.marcado=""; queueSave(); render(); log("Nova cena","Tesoura pronta","Marca solta e Corte de Átropos disponível de novo."); }
+  else if(a==="new"){ openModal(el.dataset.list,null); }
+  else if(a==="edit"){ openModal(el.dataset.list,Number(el.dataset.i)); }
+  else if(a==="del"){ const l=el.dataset.list,i=Number(el.dataset.i); if(el.dataset.confirm==="1"){ S[l].splice(i,1); queueSave(); render(); } else { el.dataset.confirm="1"; el.textContent="Confirmar"; } }
+  else if(a==="todo-del"){ const id=el.dataset.id; if(el.dataset.confirm==="1") dbWrite(()=>db.doc("tarefas/"+id).delete()); else { el.dataset.confirm="1"; el.textContent="Apagar?"; } }
+  else if(a==="todo-showdone"){ showDone=!showDone; render(); }
+  else if(a==="nf"){ noteFilter=el.dataset.v; render(); }
+  else if(a==="note-pin"){ const n=notas.find(x=>x.id===el.dataset.id); if(n) dbWrite(()=>db.doc("notas/"+n.id).update({fixada:!n.fixada})); }
+  else if(a==="note-del"){ const id=el.dataset.id; if(el.dataset.confirm==="1") dbWrite(()=>db.doc("notas/"+id).delete()); else { el.dataset.confirm="1"; el.textContent="Confirmar"; } }
+  else if(a==="note-edit"){ const n=notas.find(x=>x.id===el.dataset.id); if(!n) return; $("#noteTit").value=n.titulo||""; $("#noteTag").value=n.tag||"Geral"; $("#noteTxt").value=n.texto||""; $("#noteForm").dataset.editing=n.id; $("#noteSubmit").textContent="Atualizar anotação"; $("#noteCancel").style.display=""; $("#noteTit").focus(); }
+});
+document.addEventListener("submit", async e=>{
+  if(e.target.id==="todoForm"){ e.preventDefault(); const v=$("#todoIn").value.trim(); if(!v) return; if(await dbWrite(()=>db.collection("tarefas").doc(uid()).set({texto:v,feito:false,criado:Date.now()}))) $("#todoIn").value=""; }
+  if(e.target.id==="noteForm"){ e.preventDefault(); const titulo=$("#noteTit").value.trim(), texto=$("#noteTxt").value.trim(), tag=$("#noteTag").value; if(!titulo&&!texto) return; const ed=e.target.dataset.editing;
+    const ok = ed ? await dbWrite(()=>db.doc("notas/"+ed).update({titulo,texto,tag})) : await dbWrite(()=>db.collection("notas").doc(uid()).set({titulo,texto,tag,fixada:false,criado:Date.now()}));
+    if(ok){ delete e.target.dataset.editing; e.target.reset(); $("#noteSubmit").textContent="Salvar anotação"; $("#noteCancel").style.display="none"; } }
+});
+$("#btnEdit").addEventListener("click",()=>{ edit=!edit; render(); });
+$("#btnEdit2").addEventListener("click",()=>{ edit=!edit; render(); });
+$("#rbMin").addEventListener("click",()=>{ const b=$("#rollbox"); b.classList.toggle("min"); $("#rbMin").textContent=b.classList.contains("min")?"Rolagens":"Ocultar"; });
+$("#rbHist").addEventListener("click",()=>{ const b=$("#rollbox"); b.classList.toggle("open"); b.classList.remove("min"); $("#rbMin").textContent="Ocultar"; if(!rolls.length) $("#rbList").innerHTML="<li>Nada ainda.</li>"; });
+async function exportBackup(){
+  if(!window.AionAuth) return;
+  const data = await window.AionAuth.exportAll();
+  const blob = new Blob([JSON.stringify(data,null,1)],{type:"application/json"});
+  const a = document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=`aion-backup-${new Date().toISOString().slice(0,10)}.json`; document.body.appendChild(a); a.click(); a.remove();
+  log("Backup","Exportado","Arquivo salvo nos Downloads/Arquivos.");
+}
+async function importBackup(file){
+  if(!file||!window.AionAuth) return;
+  try{ const data=JSON.parse(await file.text()); if(!data.ficha) throw new Error("sem ficha"); await window.AionAuth.importAll(data); log("Backup","Importado","Ficha, notas e tarefas restauradas."); }
+  catch(e){ log("Backup","Arquivo inválido","Escolha um arquivo aion-backup-….json exportado pela ficha.","fail"); }
+}
+function route(){ const h=location.hash.replace("#",""); if(tab!==h) window.scrollTo(0,0); tab=["ficha","combate","rituais","habilidades","inventario","lore","campanha"].includes(h)?h:"ficha"; render(); }
+window.addEventListener("hashchange", route);
+route(); connect();
+</script>
+<script type="module" src="db.js"></script>
+<script>
+if("serviceWorker" in navigator){ window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{})); }
+window.addEventListener("online",()=>setSync("Sincronizando…"));
+window.addEventListener("offline",()=>setSync("Offline, salvo no aparelho"));
+</script>
+</body>
+</html>

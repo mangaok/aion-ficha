@@ -1,0 +1,610 @@
+{
+ "versao": 1,
+ "ficha": {
+  "info": {
+   "nome": "Aion",
+   "jogador": "Manga",
+   "origem": "Acadêmico",
+   "classe": "Ocultista",
+   "trilha": "Lâmina Maldita",
+   "nex": 10,
+   "patente": "Recruta",
+   "idade": "22 anos",
+   "nacionalidade": "Grego · Eleusis",
+   "idiomas": "Grego · Português · Sumério",
+   "deslocamento": "9 m / 6 q",
+   "ambientacao": "Europa pós-apocalíptica, 2075. A guerra nuclear afinou a Membrana e o folclore dos bairros de imigrantes ganhou corpo.",
+   "aparencia": "Casaco escuro longo e estruturado, mochila militar surrada, bastão de madeira escura, amuleto de bronze de Hécate. As mãos são pretas até o pulso, com cicatrizes de sigilo nas palmas.",
+   "afinidade": false
+  },
+  "atributos": {
+   "AGI": 1,
+   "FOR": 1,
+   "INT": 2,
+   "PRE": 3,
+   "VIG": 2
+  },
+  "status": {
+   "pv": {
+    "atual": 18,
+    "max": 18
+   },
+   "san": {
+    "atual": 25,
+    "max": 25
+   },
+   "pe": {
+    "atual": 14,
+    "max": 14
+   }
+  },
+  "defesa": {
+   "equip": 0,
+   "outros": 0
+  },
+  "protecao": "",
+  "resistencias": "",
+  "proficiencias": "Armas simples",
+  "pericias": {
+   "ciencias": {
+    "treino": 5,
+    "outros": 0
+   },
+   "enganacao": {
+    "treino": 5,
+    "outros": 0
+   },
+   "fortitude": {
+    "treino": 5,
+    "outros": 0
+   },
+   "iniciativa": {
+    "treino": 5,
+    "outros": 0
+   },
+   "intuicao": {
+    "treino": 5,
+    "outros": 0
+   },
+   "investigacao": {
+    "treino": 5,
+    "outros": 0
+   },
+   "ocultismo": {
+    "treino": 5,
+    "outros": 0
+   },
+   "percepcao": {
+    "treino": 5,
+    "outros": 0
+   },
+   "profissao": {
+    "treino": 5,
+    "outros": 0
+   },
+   "religiao": {
+    "treino": 0,
+    "outros": 2
+   },
+   "vontade": {
+    "treino": 5,
+    "outros": 2
+   }
+  },
+  "ataques": [
+   {
+    "arma": "Tesoura das Moiras",
+    "dano": "1d6",
+    "tipo": "Corte",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 19,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "uma mão",
+    "id": "ts1",
+    "variante": "Simples",
+    "nome": "Tesoura das Moiras · Simples",
+    "pericia": "luta",
+    "extra": "",
+    "custo": 0,
+    "nota": "Sem ritual, ataque normal com Luta."
+   },
+   {
+    "arma": "Tesoura das Moiras",
+    "dano": "1d6",
+    "tipo": "Corte",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 19,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "uma mão",
+    "id": "ts2",
+    "variante": "Amaldiçoada",
+    "nome": "Tesoura das Moiras · Amaldiçoada",
+    "pericia": "ocultismo",
+    "extra": "1d6 Conhecimento",
+    "custo": 0,
+    "nota": "Precisa de Amaldiçoar Arma ativo (2 PE como movimento, dura a cena). Lâmina Maldita troca Luta por Ocultismo."
+   },
+   {
+    "arma": "Tesoura das Moiras",
+    "dano": "1d6",
+    "tipo": "Corte",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 19,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "uma mão",
+    "id": "ts3",
+    "variante": "Decadência",
+    "nome": "Tesoura das Moiras · Decadência",
+    "pericia": "luta",
+    "extra": "3d8+3 Morte",
+    "custo": 3,
+    "nota": "Decadência Discente embutida no golpe: sem teste de resistência, soma ao dano da arma."
+   },
+   {
+    "arma": "Tesoura das Moiras",
+    "dano": "1d6",
+    "tipo": "Corte",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 19,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "uma mão",
+    "id": "ts4",
+    "variante": "Amaldiçoada + Decadência",
+    "nome": "Tesoura das Moiras · Amaldiçoada + Decadência",
+    "pericia": "ocultismo",
+    "extra": "1d6 Conhecimento, 3d8+3 Morte",
+    "custo": 3,
+    "nota": "Arma já amaldiçoada e Decadência Discente embutida. O golpe mais forte do Aion."
+   },
+   {
+    "arma": "Bastão",
+    "dano": "1d8",
+    "tipo": "Impacto",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 20,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "duas mãos (1d6 com uma)",
+    "id": "bs1",
+    "variante": "Simples",
+    "nome": "Bastão · Simples",
+    "pericia": "luta",
+    "extra": "",
+    "custo": 0,
+    "nota": "Sem ritual, ataque normal com Luta."
+   },
+   {
+    "arma": "Bastão",
+    "dano": "1d8",
+    "tipo": "Impacto",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 20,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "duas mãos (1d6 com uma)",
+    "id": "bs2",
+    "variante": "Amaldiçoada",
+    "nome": "Bastão · Amaldiçoada",
+    "pericia": "ocultismo",
+    "extra": "1d6 Conhecimento",
+    "custo": 0,
+    "nota": "Precisa de Amaldiçoar Arma ativo (2 PE como movimento, dura a cena). Lâmina Maldita troca Luta por Ocultismo."
+   },
+   {
+    "arma": "Bastão",
+    "dano": "1d8",
+    "tipo": "Impacto",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 20,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "duas mãos (1d6 com uma)",
+    "id": "bs3",
+    "variante": "Decadência",
+    "nome": "Bastão · Decadência",
+    "pericia": "luta",
+    "extra": "3d8+3 Morte",
+    "custo": 3,
+    "nota": "Decadência Discente embutida no golpe: sem teste de resistência, soma ao dano da arma."
+   },
+   {
+    "arma": "Bastão",
+    "dano": "1d8",
+    "tipo": "Impacto",
+    "atributoDano": "FOR",
+    "bonusAtk": 0,
+    "critMargem": 20,
+    "critMult": 2,
+    "alcance": "Adjacente",
+    "empunhadura": "duas mãos (1d6 com uma)",
+    "id": "bs4",
+    "variante": "Amaldiçoada + Decadência",
+    "nome": "Bastão · Amaldiçoada + Decadência",
+    "pericia": "ocultismo",
+    "extra": "1d6 Conhecimento, 3d8+3 Morte",
+    "custo": 3,
+    "nota": "Arma já amaldiçoada e Decadência Discente embutida. O golpe mais forte do Aion."
+   }
+  ],
+  "habilidades": [
+   {
+    "id": "h1",
+    "nome": "Escolhido pelo Outro Lado",
+    "fonte": "Ocultista",
+    "desc": "Marcado por uma experiência paranormal, pode conjurar rituais. Acessa 1º círculo agora, 2º em NEX 25%, 3º em NEX 55% e 4º em NEX 85%. Começou com três rituais de 1º círculo e aprende um novo ritual a cada NEX, de qualquer círculo que já possa lançar. Esses rituais não contam no limite de rituais conhecidos."
+   },
+   {
+    "id": "h2",
+    "nome": "Lâmina Maldita",
+    "fonte": "Trilha · NEX 10%",
+    "desc": "Aprende Amaldiçoar Arma. Pode gastar +1 PE ao lançá-lo para que a conjuração seja uma ação de movimento. Enquanto a arma estiver amaldiçoada por esse ritual, usa Ocultismo no lugar de Luta ou Pontaria nos testes de ataque com ela."
+   },
+   {
+    "id": "h3",
+    "nome": "Saber é Poder",
+    "fonte": "Origem · Acadêmico",
+    "desc": "Ao fazer um teste usando Intelecto, pode gastar 2 PE para receber +5 nesse teste. Na ficha, ligue o interruptor Saber é Poder antes de rolar."
+   }
+  ],
+  "rituais": [
+   {
+    "id": "r1",
+    "nome": "Amaldiçoar Arma",
+    "elemento": "Conhecimento",
+    "circulo": 1,
+    "execucao": "Padrão (movimento com Lâmina Maldita, +1 PE)",
+    "alcance": "Toque",
+    "alvo": "1 arma corpo a corpo ou pacote de munição",
+    "duracao": "Cena",
+    "resistencia": "",
+    "desc": "Ritual de elemento variável; o Aion escolheu Conhecimento. A arma passa a causar +1d6 de dano de Conhecimento.",
+    "formas": [
+     {
+      "nome": "Normal",
+      "custo": 1,
+      "rolagem": "",
+      "efeito": "+1d6 de Conhecimento na arma pela cena.",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Normal como movimento",
+      "custo": 2,
+      "rolagem": "",
+      "efeito": "Mesma coisa, mas como ação de movimento (Lâmina Maldita).",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Discente",
+      "custo": 3,
+      "rolagem": "",
+      "efeito": "Bônus vira +2d6.",
+      "reqCirculo": 2,
+      "afinidade": false
+     },
+     {
+      "nome": "Verdadeiro",
+      "custo": 6,
+      "rolagem": "",
+      "efeito": "Bônus vira +4d6.",
+      "reqCirculo": 3,
+      "afinidade": true
+     }
+    ]
+   },
+   {
+    "id": "r2",
+    "nome": "Cicatrização",
+    "elemento": "Morte",
+    "circulo": 1,
+    "execucao": "Padrão",
+    "alcance": "Toque",
+    "alvo": "1 ser",
+    "duracao": "Instantânea",
+    "resistencia": "",
+    "desc": "Acelera o tempo nas feridas do alvo, que fecham na hora. O alvo recupera PV, mas envelhece 1 ano automaticamente.",
+    "formas": [
+     {
+      "nome": "Normal",
+      "custo": 1,
+      "rolagem": "3d8+3",
+      "efeito": "Cura 3d8+3 PV.",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Discente",
+      "custo": 3,
+      "rolagem": "5d8+5",
+      "efeito": "Cura 5d8+5 PV.",
+      "reqCirculo": 2,
+      "afinidade": false
+     },
+     {
+      "nome": "Verdadeiro",
+      "custo": 10,
+      "rolagem": "7d8+7",
+      "efeito": "Alcance curto, alvo: seres escolhidos. Cura 7d8+7 PV.",
+      "reqCirculo": 4,
+      "afinidade": true
+     }
+    ]
+   },
+   {
+    "id": "r3",
+    "nome": "Decadência",
+    "elemento": "Morte",
+    "circulo": 1,
+    "execucao": "Padrão",
+    "alcance": "Toque",
+    "alvo": "1 ser",
+    "duracao": "Instantânea",
+    "resistencia": "Fortitude reduz à metade",
+    "desc": "Espirais de trevas envolvem a mão do Aion e corroem o alvo com dano de Morte.",
+    "formas": [
+     {
+      "nome": "Normal",
+      "custo": 1,
+      "rolagem": "2d8+2",
+      "efeito": "2d8+2 de Morte; Fortitude reduz à metade.",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Discente",
+      "custo": 3,
+      "rolagem": "3d8+3",
+      "efeito": "Sem resistência. Transfere as espirais para uma arma e faz um ataque corpo a corpo; se acertar, soma o dano da arma e do ritual.",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Verdadeiro",
+      "custo": 6,
+      "rolagem": "8d8+8",
+      "efeito": "Alcance pessoal, área: explosão de 6 m de raio. Afeta todos na área.",
+      "reqCirculo": 3,
+      "afinidade": false
+     }
+    ]
+   },
+   {
+    "id": "r4",
+    "nome": "Definhar",
+    "elemento": "Morte",
+    "circulo": 1,
+    "execucao": "Padrão",
+    "alcance": "Curto",
+    "alvo": "1 ser",
+    "duracao": "Cena",
+    "resistencia": "Fortitude parcial",
+    "desc": "Uma lufada de cinzas drena as forças do alvo.",
+    "formas": [
+     {
+      "nome": "Normal",
+      "custo": 1,
+      "rolagem": "",
+      "efeito": "Alvo fica fatigado. Se passar na resistência, fica vulnerável.",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Discente",
+      "custo": 3,
+      "rolagem": "",
+      "efeito": "Alvo fica exausto. Se passar, fica fatigado.",
+      "reqCirculo": 2,
+      "afinidade": false
+     },
+     {
+      "nome": "Verdadeiro",
+      "custo": 6,
+      "rolagem": "",
+      "efeito": "Como discente, até 5 seres.",
+      "reqCirculo": 3,
+      "afinidade": true
+     }
+    ]
+   },
+   {
+    "id": "r5",
+    "nome": "Perturbação",
+    "elemento": "Conhecimento",
+    "circulo": 1,
+    "execucao": "Padrão",
+    "alcance": "Curto",
+    "alvo": "1 pessoa",
+    "duracao": "1 rodada",
+    "resistencia": "Vontade anula",
+    "desc": "Uma ordem que o alvo precisa ouvir (não precisa entender). Se falhar, obedece no próprio turno. Fuja: gasta o turno se afastando. Largue: solta o que segura e não pode pegar de volta até seu próximo turno. Pare: fica pasmo (só reações). Sente-se: senta no chão (ou desce até ele) e não levanta até seu próximo turno. Venha: gasta o turno se aproximando.",
+    "formas": [
+     {
+      "nome": "Normal",
+      "custo": 1,
+      "rolagem": "",
+      "efeito": "Escolha um dos cinco comandos.",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Discente",
+      "custo": 3,
+      "rolagem": "3d8",
+      "efeito": "Alvo vira 1 ser e ganha o comando Sofra: 3d8 de Conhecimento e abalado por uma rodada.",
+      "reqCirculo": 1,
+      "afinidade": false
+     },
+     {
+      "nome": "Verdadeiro",
+      "custo": 6,
+      "rolagem": "",
+      "efeito": "Até 5 seres, ou comando Ataque: o alvo agride outro alvo à sua escolha em alcance médio.",
+      "reqCirculo": 3,
+      "afinidade": true
+     }
+    ]
+   }
+  ],
+  "itens": [
+   {
+    "id": "i1",
+    "nome": "Bastão",
+    "categoria": "0",
+    "espacos": 1,
+    "tipo": "Arma simples · corpo a corpo · uma mão · impacto",
+    "desc": "Madeira escura e maciça, estava ao lado do Aion quando ele despertou. Dano 1d6 com uma mão, 1d8 com as duas. Crítico x2.",
+    "pendente": false
+   },
+   {
+    "id": "i2",
+    "nome": "Amuleto Sagrado (Hécate)",
+    "categoria": "0",
+    "espacos": 1,
+    "tipo": "Acessório",
+    "desc": "Bronze escurecido com a figura de Hécate, comprado de uma mulher cega no mercado de Eleusis. Ocupa o espaço de item vestido e dá +2 em Religião e Vontade.",
+    "pendente": false
+   },
+   {
+    "id": "i3",
+    "nome": "Bandoleira",
+    "categoria": "I",
+    "espacos": 1,
+    "tipo": "Item operacional",
+    "desc": "Cinto com bolsos e alças. Uma vez por rodada, saca ou guarda um item do inventário como ação livre.",
+    "pendente": false
+   },
+   {
+    "id": "i4",
+    "nome": "Componentes Ritualísticos (Conhecimento)",
+    "categoria": "0",
+    "espacos": 1,
+    "tipo": "Item paranormal",
+    "desc": "Escrituras, papéis, livros, pergaminhos, pedras preciosas, ouro, tecido, cristais brancos, vidro, máscaras, instrumentos de escrita. Necessários para conjurar rituais de Conhecimento.",
+    "pendente": false
+   },
+   {
+    "id": "i5",
+    "nome": "Componentes Ritualísticos (Morte)",
+    "categoria": "0",
+    "espacos": 1,
+    "tipo": "Item paranormal",
+    "desc": "Ossos, dentes, cinzas, fios de cabelo, cristais pretos, relógios, galhos e folhas secas, plantas mortas, raízes, areia, poeira, lodo. Necessários para rituais de Morte.",
+    "pendente": false
+   },
+   {
+    "id": "i6",
+    "nome": "Componentes Ritualísticos (Energia)",
+    "categoria": "0",
+    "espacos": 1,
+    "tipo": "Item paranormal",
+    "desc": "Eletricidade, eletrônicos, circuitos, fontes de calor e luz, pilhas, baterias, cabos, pólvora, moedas, dados, ímãs. Ainda sem ritual de Energia conhecido.",
+    "pendente": false
+   },
+   {
+    "id": "i7",
+    "nome": "Manual Operacional (Intuição)",
+    "categoria": "0",
+    "espacos": 1,
+    "tipo": "Acessório",
+    "desc": "Tirado de um homem morto numa estrada vazia. Fornece +5 em Intuição.",
+    "pendente": false
+   },
+   {
+    "id": "i8",
+    "nome": "Mochila Militar",
+    "categoria": "I",
+    "espacos": -2,
+    "tipo": "Item operacional",
+    "desc": "Velha e sem identificação, sobra dos meses na milícia do bairro grego. Não ocupa espaço e aumenta a carga em 2 espaços.",
+    "pendente": false
+   },
+   {
+    "id": "i9",
+    "nome": "Tesoura das Moiras",
+    "categoria": "Relíquia",
+    "espacos": 0,
+    "tipo": "Arma do Outro Lado · Morte · entregue pelo mestre",
+    "desc": "Três Moiras gravadas em três metais: Cloto no arco traseiro, Láquesis na lâmina prateada, Átropos na lâmina negra. Cada uma guarda um poder. O painel completo, com os botões de uso, fica na aba Combate.",
+    "pendente": false,
+    "reliquia": true
+   }
+  ],
+  "inventario": {
+   "prestigio": 0,
+   "limiteCredito": "Baixo",
+   "limiteItens": "2 / 0 / 0 / 0",
+   "cargaMax": 5
+  },
+  "lore": {
+   "titulo": "A queda de um nome",
+   "citacao": "Eu sobrevivi a algo que matou outros seis. Preciso saber o quê e por que fui eu.",
+   "texto": "Ele tinha vinte e dois anos quando abriu os olhos e descobriu que não era ninguém. Foi a primeira coisa que entendeu, antes mesmo da pedra fria nas costas, do cheiro de incenso queimado, dos seis corpos ao redor dispostos como pontos de uma estrela inacabada. Não veio nada. Nenhum nome, nenhum rosto, nenhuma certeza de que alguém em algum lugar estava esperando ele voltar.\n\nQuando olhou pras mãos, encontrou duas coisas. Nas palmas, cicatrizes finas formando um símbolo que parecia familiar e estranho na mesma medida. E a pele, preta até o pulso, escura de um jeito que não era cor nem sujeira nem queimadura. Pareciam luvas de couro. Não eram. Ele esfregou contra a roupa, contra a pedra, contra o tecido de alguém que não respirava mais. Nada saiu.\n\nFoi quando estava saindo do círculo que viu, gravada na pedra ao lado de onde sua cabeça tinha estado, uma única palavra em letras gregas antigas: ΑΙΩΝ. Aion. Não sabia se era um nome, um conceito, uma ordem ou uma sentença. Mas era a única coisa naquele lugar que parecia falar com ele, e quando alguém perguntou depois quem ele era, foi a palavra que saiu. Desde então é como se chama. Não porque tenha certeza de que é seu, mas porque era o que tinha.\n\nA cidade se chamava Eleusis. Ele descobriu dias depois, quando um velho que vendia óleos num beco contou rindo de um jeito que não era zombaria. Eleusis era um lugar antigo. Antes da guerra, antes de tudo, era onde os gregos celebravam os Mistérios, rituais tão sagrados que falar deles em voz alta era condenado pela morte. Os iniciados desciam um caminho de pedra que ainda existe em algum lugar sob os escombros, bebiam algo que ninguém escreveu o nome, e voltavam diferentes. Os que voltavam.\n\nO amuleto Aion comprou pouco depois, no mesmo mercado, de uma mulher cega. Bronze escurecido com a figura de Hécate gravada, a deusa de três faces que carrega tochas e guarda as encruzilhadas. A vendedora disse que era ela quem ajudou Deméter a procurar Perséfone quando o mundo virou inverno, e que protege quem caminha em lugares onde dois mundos se tocam. Aion não pediu o preço. Pagou o que tinha e foi embora. Não foi a proteção que o convenceu, foi o reconhecimento estranho que sentiu quando seus dedos pretos fecharam em volta do bronze.\n\nTem coisas que ele aprendeu a não falar. Como lê símbolos em paredes condenadas e entende o suficiente pra ter medo. Como os rituais que conjura nunca foram ensinados, simplesmente acontecem quando ele precisa, como se as mãos soubessem antes dele.\n\nDesde então caminha. De abrigo em abrigo, atravessando uma Europa em ruínas onde o Outro Lado sangra pra dentro do mundo. O bastão de madeira escura estava ao seu lado quando despertou. A mochila militar veio depois, durante alguns meses numa milícia do bairro grego que aceitou ele sem documentos, sem nome, sem nada. Saiu antes que começassem a perguntar de onde vinha com aquelas mãos pretas e aqueles olhos cansados demais. O manual de treinamento ele tirou de um homem morto numa estrada vazia.\n\nNão é que ele não queira fazer amigos. É que toda vez que alguém começa a se importar, sente uma coisa apertar no peito que não sabe se é medo do que vai descobrir sobre si mesmo, ou medo do que vai acontecer com a pessoa quando ele descobrir. Então vai embora. E toda vez fica mais difícil."
+  },
+  "tesoura": {
+   "pericia": "ocultismo",
+   "dano": "1d6",
+   "atributoDano": "FOR",
+   "critMargem": 19,
+   "critMult": 2,
+   "extra": "",
+   "marcado": "",
+   "corteUsado": false,
+   "corte": null
+  }
+ },
+ "notas": [
+  {
+   "id": "n1",
+   "titulo": "As mãos pretas e os sigilos",
+   "tag": "Mistério",
+   "fixada": true,
+   "criado": 1795103400000,
+   "texto": "Pele preta até o pulso que não sai com nada. Cicatrizes nas palmas formando um símbolo familiar e estranho. Os rituais saem 'como se as mãos soubessem antes dele'."
+  },
+  {
+   "id": "n2",
+   "titulo": "O ritual de Eleusis",
+   "tag": "Mistério",
+   "fixada": true,
+   "criado": 1795103400001,
+   "texto": "Acordou no centro de um círculo incompleto, seis corpos dispostos como pontas de uma estrela inacabada, cheiro de incenso. A palavra ΑΙΩΝ gravada na pedra ao lado da cabeça. Seis mortos = dois grupos de três? A tesoura tem três Moiras."
+  },
+  {
+   "id": "n3",
+   "titulo": "Mulher cega do mercado",
+   "tag": "NPC",
+   "fixada": false,
+   "criado": 1795103400002,
+   "texto": "Vendeu o amuleto de Hécate. Falou que Hécate ajudou Deméter a procurar Perséfone e protege quem caminha onde dois mundos se tocam. Vale procurar de novo?"
+  },
+  {
+   "id": "n4",
+   "titulo": "Velho dos óleos",
+   "tag": "NPC",
+   "fixada": false,
+   "criado": 1795103400003,
+   "texto": "Num beco de Eleusis. Contou ao Aion o nome da cidade e a história dos Mistérios."
+  },
+  {
+   "id": "n5",
+   "titulo": "Milícia do bairro grego",
+   "tag": "Local",
+   "fixada": false,
+   "criado": 1795103400004,
+   "texto": "Aceitou o Aion sem documentos por alguns meses (origem da mochila militar e da perícia Profissão). Ele saiu antes que perguntassem demais."
+  }
+ ],
+ "tarefas": []
+}
